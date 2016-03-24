@@ -4,7 +4,7 @@ package cz.abclinuxu.datoveschranky.tinyDB.holders;
  *
  * Interface pro čtení obsahu XML elementu.
  * 
- * @author Vaclav Rosecky <xrosecky 'at' gmail 'dot' com>
+ * @author Vaclav Rosecky &lt;xrosecky 'at' gmail 'dot' com&gt;
  */
 public interface OutputHolder<T> {
 

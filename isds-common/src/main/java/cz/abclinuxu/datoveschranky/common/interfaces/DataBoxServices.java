@@ -4,7 +4,7 @@ package cz.abclinuxu.datoveschranky.common.interfaces;
  *
  * Zpřístupňuje služby pro datovou schránku
  * 
- * @author Vaclav Rosecky <xrosecky 'at' gmail 'dot' com>
+ * @author Vaclav Rosecky &lt;xrosecky 'at' gmail 'dot' com&gt;
  */
 public interface DataBoxServices {
 

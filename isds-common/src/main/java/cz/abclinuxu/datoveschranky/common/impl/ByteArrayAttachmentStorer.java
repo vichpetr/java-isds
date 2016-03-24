@@ -11,7 +11,7 @@ import java.io.OutputStream;
 /**
  * Ukládá přílohy do pole bytů v paměti.
  * 
- * @author Vaclav Rosecky <xrosecky 'at' gmail 'dot' com>
+ * @author Vaclav Rosecky &lt;xrosecky 'at' gmail 'dot' com&gt;
  */
 public class ByteArrayAttachmentStorer implements AttachmentStorer {
 

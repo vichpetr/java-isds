@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Třída pro vyhledávání datových schránek a ověřování jejich stavu.
  * 
- * @author Vaclav Rosecky <xrosecky 'at' gmail 'dot' com>
+ * @author Vaclav Rosecky &lt;xrosecky 'at' gmail 'dot' com&gt;
  */
 public interface DataBoxSearchService {
 

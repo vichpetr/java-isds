@@ -13,7 +13,7 @@ import org.xml.sax.Attributes;
  * 
  * TODO: rozepsat dokumentaci k metodám.
  * 
- * @author Vaclav Rosecky <xrosecky 'at' gmail 'dot' com>
+ * @author Vaclav Rosecky &lt;xrosecky 'at' gmail 'dot' com&gt;
  */
 public abstract class AbstractResponseParser implements ResponseParser {
 

@@ -8,7 +8,7 @@ import java.io.InputStream;
 /**
  * Obsah přílohy uložený v souboru.
  * 
- * @author Vaclav Rosecky <xrosecky 'at' gmail 'dot' com>
+ * @author Vaclav Rosecky &lt;xrosecky 'at' gmail 'dot' com&gt;
  */
 public class FileContent implements Content {
 

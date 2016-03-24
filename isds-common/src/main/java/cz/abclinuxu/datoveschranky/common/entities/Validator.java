@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Pomocná třída pro validaci
  * 
- * @author Vaclav Rosecky <xrosecky 'at' gmail 'dot' com>
+ * @author Vaclav Rosecky &lt;xrosecky 'at' gmail 'dot' com&gt;
  */
 public class Validator {
     

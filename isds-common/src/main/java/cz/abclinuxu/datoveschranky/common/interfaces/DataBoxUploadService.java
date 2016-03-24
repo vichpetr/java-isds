@@ -5,7 +5,7 @@ import cz.abclinuxu.datoveschranky.common.entities.Message;
 /**
  * Služba zodpovědná za odesílání zpráv.
  * 
- * @author Vaclav Rosecky <xrosecky 'at' gmail 'dot' com>
+ * @author Vaclav Rosecky &lt;xrosecky 'at' gmail 'dot' com&gt;
  */
 public interface DataBoxUploadService {
 

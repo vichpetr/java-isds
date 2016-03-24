@@ -8,7 +8,7 @@ import org.apache.log4j.Logger;
 
 /**
  *
- * @author Vaclav Rosecky <xrosecky 'at' gmail 'dot' com>
+ * @author Vaclav Rosecky &lt;xrosecky 'at' gmail 'dot' com&gt;
  */
 public class ErrorHandling {
 
