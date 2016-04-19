@@ -1,5 +1,6 @@
-JAVA_ISDS - multiplatformní knihovna v Javě pro přístup k ISDS (informačnímu
-systému datových schránek).
+# JAVA_ISDS
+
+*Multiplatformní knihovna v Javě pro přístup k ISDS (informačnímu systému datových schránek).*
 
 Knihovna se skládá ze čtyř modulů:
 
@@ -17,3 +18,7 @@ schránek a podobně.
 
 Build se provádí mavenem, takže jen stačí spustit příkaz "mvn package" a ten se
 o vše potřebné postará.
+
+## Continuous Integration
+
+CI server hosted on Travis-ci.org: [![Build Status](https://travis-ci.org/czgov/JAVA_ISDS.svg?branch=master)](https://travis-ci.org/czgov/JAVA_ISDS)
