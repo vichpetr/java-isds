@@ -21,6 +21,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.5</maven.compiler.source>
     <maven.compiler.target>1.5</maven.compiler.target>
+    <isds.config.path>target/test-classes/configuration.properties</isds.config.path>
   </properties>
 
   <dependencyManagement>
@@ -55,11 +56,21 @@
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-	<artifactId>maven-javadoc-plugin</artifactId>
-	  <configuration>
-	    <author>true</author>
-	    <defaultAuthor>Vaclav Rosecky</defaultAuthor>
-	  </configuration>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <configuration>
+          <author>true</author>
+          <defaultAuthor>Vaclav Rosecky</defaultAuthor>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <trimStackTrace>false</trimStackTrace>
+          <systemPropertyVariables>
+            <isds.config.path>${isds.config.path}</isds.config.path>
+          </systemPropertyVariables>
+        </configuration>
       </plugin>
     </plugins>
   </build>
