@@ -2,3 +2,7 @@ language: java
 
 jdk:
   - oraclejdk7
+
+before_install:
+  - openssl aes-256-cbc -K $encrypted_86bcbc4c8759_key -iv $encrypted_86bcbc4c8759_iv -in ISDS/isds-config.properties.enc -out ISDS/isds-config.properties -d
+

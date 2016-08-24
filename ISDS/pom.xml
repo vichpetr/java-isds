@@ -11,13 +11,10 @@
   <version>1.0-SNAPSHOT</version>
   <name>ISDS</name>
   <url>http://maven.apache.org</url>
+  <properties>
+    <isds.config.path>${project.basedir}/isds-config.properties</isds.config.path>
+  </properties>
   <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.1</version>
-      <scope>test</scope>
-    </dependency>
     <dependency>
       <groupId>cz.abclinuxu.datoveschranky</groupId>
       <artifactId>ISDSCommon</artifactId>
@@ -54,4 +51,18 @@
       <version>1.2.14</version>
     </dependency>
   </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <trimStackTrace>false</trimStackTrace>
+          <systemPropertyVariables>
+            <isds.config.path>${isds.config.path}</isds.config.path>
+          </systemPropertyVariables>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 </project>

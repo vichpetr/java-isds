@@ -1,3 +1,7 @@
+
+# ignore unencrypted file
+isds-config.properties
+
 ### OSX template
 .DS_Store
 .AppleDouble
