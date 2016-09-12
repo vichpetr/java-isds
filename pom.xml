@@ -3,11 +3,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>cz.abclinuxu.datoveschranky</groupId>
-  <artifactId>JAVA_ISDS</artifactId>
+  <artifactId>java-isds</artifactId>
   <packaging>pom</packaging>
   <version>1.0-SNAPSHOT</version>
-  <name>JAVA_ISDS</name>
-  <url>http://maven.apache.org</url>
+  <url>https://github.com/czgov/java-isds</url>
 
   <repositories>
     <repository>
@@ -43,12 +42,12 @@
   </dependencies>
 
   <modules>
-    <module>ISDSCommon</module>
-    <module>TinyISDS</module>
-    <module>ISDSWebServices</module>
-    <module>ISDS</module>
-    <module>MessageViewer</module>
-    <module>Examples</module>
+    <module>isds-common</module>
+    <module>tiny-isds</module>
+    <module>isds-web-services</module>
+    <module>isds</module>
+    <module>message-viewer</module>
+    <module>examples</module>
   </modules>
 
   <build>
