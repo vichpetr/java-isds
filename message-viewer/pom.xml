@@ -3,19 +3,16 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <artifactId>JAVA_ISDS</artifactId>
+    <artifactId>java-isds</artifactId>
     <groupId>cz.abclinuxu.datoveschranky</groupId>
     <version>1.0-SNAPSHOT</version>
   </parent>
-  <groupId>cz.abclinuxu.datoveschranky</groupId>
-  <artifactId>Examples</artifactId>
-  <version>1.0-SNAPSHOT</version>
-  <name>Examples</name>
-  <url>http://maven.apache.org</url>
+  <artifactId>message-viewer</artifactId>
+
   <dependencies>
     <dependency>
       <groupId>cz.abclinuxu.datoveschranky</groupId>
-      <artifactId>ISDS</artifactId>
+      <artifactId>isds</artifactId>
       <version>1.0-SNAPSHOT</version>
     </dependency>
   </dependencies>
@@ -29,7 +26,7 @@
         <configuration>
           <archive>
             <manifest>
-              <mainClass>cz.abclinuxu.datoveschranky.examples.Main</mainClass>
+              <mainClass>cz.abclinuxu.datoveschranky.MessageViewer</mainClass>
               <addClasspath>true</addClasspath>
               <classpathPrefix>lib/</classpathPrefix>
             </manifest>
