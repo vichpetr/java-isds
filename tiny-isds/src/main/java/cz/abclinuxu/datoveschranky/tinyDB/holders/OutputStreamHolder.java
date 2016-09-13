@@ -10,7 +10,7 @@ import java.io.OutputStreamWriter;
 /**
  * Zapíše obsah elementu do OutputStreamu.
  * 
- * @author Vaclav Rosecky <xrosecky 'at' gmail 'dot' com>
+ * @author Vaclav Rosecky &lt;xrosecky 'at' gmail 'dot' com&gt;
  */
 public class OutputStreamHolder implements OutputHolder<OutputStream>, Closeable {
 

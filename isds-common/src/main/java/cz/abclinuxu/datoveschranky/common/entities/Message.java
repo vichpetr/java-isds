@@ -7,7 +7,7 @@ import java.util.List;
  *
  * Celá zpráva, tzn. obálka zprávy + přílohy
  * 
- * @author Vaclav Rosecky <xrosecky 'at' gmail 'dot' com> 
+ * @author Vaclav Rosecky &lt;xrosecky 'at' gmail 'dot' com&gt;
  */
 public class Message implements Serializable {
 

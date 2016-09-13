@@ -7,7 +7,7 @@ import java.security.KeyStore;
  *
  * Konfigurace připojení k ISDS.
  * 
- * @author Vaclav Rosecky <xrosecky 'at' gmail 'dot' com>
+ * @author Vaclav Rosecky &lt;xrosecky 'at' gmail 'dot' com&gt;
  */
 public class Config implements Serializable {
 

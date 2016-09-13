@@ -11,7 +11,7 @@ import java.util.Stack;
  * 
  * Nadstavba nad SAX parserem, tohle přijde refaktorovat s třídou ResponsePraser.
  * 
- * @author Vaclav Rosecky <xrosecky 'at' gmail 'dot' com>
+ * @author Vaclav Rosecky &lt;xrosecky 'at' gmail 'dot' com&gt;
  */
 public class SimpleSAXParser extends DefaultHandler {
 

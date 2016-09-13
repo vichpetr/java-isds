@@ -45,7 +45,7 @@ import org.xml.sax.SAXException;
  * Tato třída umožnuje přihlášení k datové schránce a základní operace s ní, tzn.
  * stažení přijatých zpráv a stažení přijaté zprávy včetně příloh.
  * 
- * @author Vaclav Rosecky <xrosecky 'at' gmail 'dot' com>
+ * @author Vaclav Rosecky &lt;xrosecky 'at' gmail 'dot' com&gt;
  * 
  */
 public class DataBoxManager implements DataBoxMessagesService, DataBoxDownloadService, DataBoxServices {

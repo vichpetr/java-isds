@@ -7,7 +7,7 @@ import java.math.BigInteger;
  * 
  * Výsledek hašovací funkce (haš + algoritmus). Tato třída je neměnná.
  * 
- * @author Vaclav Rosecky <xrosecky 'at' gmail 'dot' com> 
+ * @author Vaclav Rosecky &lt;xrosecky 'at' gmail 'dot' com&gt;
  */
 import java.util.Arrays;
 public class Hash implements Serializable {

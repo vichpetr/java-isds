@@ -8,7 +8,7 @@ import java.io.OutputStream;
 /**
  * Rozhraní, které určuje, kam se budou přílohy ukládat (do souboru, do paměti, ...)
  * 
- * @author Vaclav Rosecky <xrosecky 'at' gmail 'dot' com>
+ * @author Vaclav Rosecky &lt;xrosecky 'at' gmail 'dot' com&gt;
  */
 public interface AttachmentStorer {
 

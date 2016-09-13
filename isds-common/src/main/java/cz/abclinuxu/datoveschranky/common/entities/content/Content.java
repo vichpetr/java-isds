@@ -8,7 +8,7 @@ import java.io.InputStream;
  * Samotný obsah přílohy, příloha může být např. uložena v souboru či v paměti
  * jako pole bajtů.
  * 
- * @author Vaclav Rosecky <xrosecky 'at' gmail 'dot' com>
+ * @author Vaclav Rosecky &lt;xrosecky 'at' gmail 'dot' com&gt;
  */
 public interface Content {
     

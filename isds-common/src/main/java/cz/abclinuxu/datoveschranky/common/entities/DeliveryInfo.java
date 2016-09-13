@@ -8,7 +8,7 @@ import java.util.List;
  *
  * Doručenka datové zprávy, viz dokumentace k ISDS. 
  * 
- * @author Vaclav Rosecky <xrosecky 'at' gmail 'dot' com>
+ * @author Vaclav Rosecky &lt;xrosecky 'at' gmail 'dot' com&gt;
  */
 public class DeliveryInfo implements Serializable  {
 

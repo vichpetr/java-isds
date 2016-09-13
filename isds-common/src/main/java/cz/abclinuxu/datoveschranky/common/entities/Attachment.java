@@ -7,7 +7,7 @@ import java.io.Serializable;
 /**
  * Reprezentuje jednu přílohu zprávy.
  * 
- * @author Vaclav Rosecky <xrosecky 'at' gmail 'dot' com>
+ * @author Vaclav Rosecky &lt;xrosecky 'at' gmail 'dot' com&gt;
  */
 public class Attachment implements Serializable {
 

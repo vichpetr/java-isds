@@ -35,7 +35,7 @@ import org.bouncycastle.tsp.TimeStampTokenInfo;
  *
  * Pomocná třída pro validaci časového razítka a podpisu zprávy. Jen prototyp!
  * 
- * @author Vaclav Rosecky <xrosecky 'at' gmail 'dot' com>
+ * @author Vaclav Rosecky &lt;xrosecky 'at' gmail 'dot' com&gt;
  */
 public class Validator {
 

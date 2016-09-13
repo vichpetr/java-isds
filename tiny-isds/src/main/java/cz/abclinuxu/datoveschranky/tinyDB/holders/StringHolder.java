@@ -4,7 +4,7 @@ package cz.abclinuxu.datoveschranky.tinyDB.holders;
  *
  * Zapisuje výsledek čtení do StringBuilderu, výsledek vrátí jako String.
  * 
- * @author Vaclav Rosecky <xrosecky 'at' gmail 'dot' com>
+ * @author Vaclav Rosecky &lt;xrosecky 'at' gmail 'dot' com&gt;
  */
 public class StringHolder implements OutputHolder<String> {
 

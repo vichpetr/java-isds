@@ -7,7 +7,7 @@ import org.xml.sax.Attributes;
  *
  * Rozhraní, přijde refaktorovat
  * 
- * @author Vaclav Rosecky <xrosecky 'at' gmail 'dot' com>
+ * @author Vaclav Rosecky &lt;xrosecky 'at' gmail 'dot' com&gt;
  * 
  */
 public interface ResponseParser {

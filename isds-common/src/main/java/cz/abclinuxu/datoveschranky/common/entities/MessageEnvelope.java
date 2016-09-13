@@ -7,7 +7,7 @@ import java.util.GregorianCalendar;
  *
  * Obálka zprávy, neobsahuje přílohy (viz třída Attachment).
  * 
- * @author Vaclav Rosecky <xrosecky 'at' gmail 'dot' com>
+ * @author Vaclav Rosecky &lt;xrosecky 'at' gmail 'dot' com&gt;
  */
 public class MessageEnvelope implements Serializable {
 

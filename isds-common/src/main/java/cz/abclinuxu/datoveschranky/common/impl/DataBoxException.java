@@ -2,7 +2,7 @@ package cz.abclinuxu.datoveschranky.common.impl;
 
 /**
  *
- * @author Vaclav Rosecky <xrosecky 'at' gmail 'dot' com>
+ * @author Vaclav Rosecky &lt;xrosecky 'at' gmail 'dot' com&gt;
  */
 public class DataBoxException extends RuntimeException {
 
