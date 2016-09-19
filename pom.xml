@@ -15,6 +15,30 @@
     <maven.compiler.target>1.5</maven.compiler.target>
   </properties>
 
+  <licenses>
+    <license>
+      <name>BSD 3-Clause License</name>
+      <url>https://raw.githubusercontent.com/czgov/java-isds/master/license.txt</url>
+    </license>
+  </licenses>
+
+  <scm>
+    <connection>scm:git:git://github.com:czgov/java-isds.git</connection>
+    <developerConnection>scm:git:ssh://github.com:simpligility/ossrh-demo.git</developerConnection>
+    <url>https://github.com/czgov/java-isds</url>
+  </scm>
+
+  <distributionManagement>
+    <snapshotRepository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
+    <repository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+    </repository>
+  </distributionManagement>
+
   <dependencyManagement>
     <dependencies>
       <dependency>
