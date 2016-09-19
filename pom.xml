@@ -8,13 +8,6 @@
   <version>1.0-SNAPSHOT</version>
   <url>https://github.com/czgov/java-isds</url>
 
-  <repositories>
-    <repository>
-      <id>some repository 2</id>
-      <url>http://mirrors.ibiblio.org/pub/mirrors/maven2</url>
-    </repository>
-  </repositories>
-
   <properties>
     <!-- maven project settings -->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
