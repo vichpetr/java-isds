@@ -65,5 +65,21 @@ public class Message implements Serializable {
     public void setTimeStamp(TimeStamp timeStamp) {
         this.timeStamp = timeStamp;
     }
-    
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Message)) {
+            return false;
+        }
+        Message message = (Message) o;
+        return envelope != null ? envelope.equals(message.envelope) : message.envelope == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return envelope != null ? envelope.hashCode() : 0;
+    }
 }
