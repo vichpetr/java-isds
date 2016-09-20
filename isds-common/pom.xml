@@ -7,6 +7,9 @@
     <groupId>cz.abclinuxu.datoveschranky</groupId>
     <version>1.0-SNAPSHOT</version>
   </parent>
+
   <artifactId>isds-common</artifactId>
+  <name>JavaISDS :: Common</name>
+  <description>Common entities and interfaces for ISDS.</description>
 
 </project>

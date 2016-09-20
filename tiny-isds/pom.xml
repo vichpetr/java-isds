@@ -7,7 +7,10 @@
     <groupId>cz.abclinuxu.datoveschranky</groupId>
     <version>1.0-SNAPSHOT</version>
   </parent>
+
   <artifactId>tiny-isds</artifactId>
+  <name>JavaISDS :: TinyISDS</name>
+  <description>Library implementing subset of JavaISDS - basically readonly access.</description>
 
   <dependencies>
     <dependency>
@@ -21,7 +24,7 @@
       <version>1.4</version>
     </dependency>
   </dependencies>
-  
+
   <build>
     <!--
     <resources>
@@ -33,9 +36,9 @@
       </resource>
     </resources>
     -->
-        
+
     <plugins>
-    
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
@@ -49,7 +52,7 @@
           </archive>
         </configuration>
       </plugin>
-      
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-dependency-plugin</artifactId>
@@ -72,5 +75,5 @@
 
     </plugins>
   </build>
-  
+
 </project>
