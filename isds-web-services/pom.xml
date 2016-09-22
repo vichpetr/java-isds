@@ -7,7 +7,10 @@
     <groupId>cz.abclinuxu.datoveschranky</groupId>
     <version>1.0-SNAPSHOT</version>
   </parent>
+
   <artifactId>isds-web-services</artifactId>
+  <name>JavaISDS :: Web Services</name>
+  <description>Entity classes generated from WSDL.</description>
 
   <dependencies>
     <dependency>

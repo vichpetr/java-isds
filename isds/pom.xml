@@ -6,7 +6,11 @@
     <groupId>cz.abclinuxu.datoveschranky</groupId>
     <version>1.0-SNAPSHOT</version>
   </parent>
+
   <artifactId>isds</artifactId>
+  <name>JavaISDS :: JavaISDS</name>
+  <description>Library for accessing ISDS system. Supports sending, downloading, searching and verification.</description>
+
   <properties>
     <isds.config.path>${project.basedir}/isds-config.properties</isds.config.path>
   </properties>

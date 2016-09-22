@@ -7,7 +7,10 @@
     <groupId>cz.abclinuxu.datoveschranky</groupId>
     <version>1.0-SNAPSHOT</version>
   </parent>
+
   <artifactId>message-viewer</artifactId>
+  <name>JavaISDS :: Message Viewer</name>
+  <description>Desktop application for viewing *.zfo messages.</description>
 
   <dependencies>
     <dependency>
