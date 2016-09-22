@@ -8,19 +8,36 @@
   <version>1.0-SNAPSHOT</version>
   <url>https://github.com/czgov/java-isds</url>
 
-  <repositories>
-    <repository>
-      <id>some repository 2</id>
-      <url>http://mirrors.ibiblio.org/pub/mirrors/maven2</url>
-    </repository>
-  </repositories>
-
   <properties>
     <!-- maven project settings -->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.5</maven.compiler.source>
     <maven.compiler.target>1.5</maven.compiler.target>
   </properties>
+
+  <licenses>
+    <license>
+      <name>BSD 3-Clause License</name>
+      <url>https://raw.githubusercontent.com/czgov/java-isds/master/license.txt</url>
+    </license>
+  </licenses>
+
+  <scm>
+    <connection>scm:git:git://github.com:czgov/java-isds.git</connection>
+    <developerConnection>scm:git:ssh://github.com:simpligility/ossrh-demo.git</developerConnection>
+    <url>https://github.com/czgov/java-isds</url>
+  </scm>
+
+  <distributionManagement>
+    <snapshotRepository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
+    <repository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+    </repository>
+  </distributionManagement>
 
   <dependencyManagement>
     <dependencies>
@@ -53,13 +70,63 @@
   <build>
     <plugins>
       <plugin>
+        <!-- generate javadoc -->
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
         <configuration>
           <author>true</author>
           <defaultAuthor>Vaclav Rosecky</defaultAuthor>
+          <!-- current JavaDocs produce lot of warnings and fail the build on Java8 -->
+          <additionalparam>-Xdoclint:none</additionalparam>
         </configuration>
+        <executions>
+          <execution>
+            <id>attach-javadocs</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <!-- generate source jar -->
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>2.2.1</version>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <goals>
+              <goal>jar-no-fork</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
+
+  <profiles>
+    <profile>
+      <id>release</id>
+      <build>
+        <plugins>
+          <plugin>
+            <!-- sign artifacts when releasing -->
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>
