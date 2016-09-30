@@ -162,7 +162,7 @@ public class MessageEnvelope implements Serializable {
     @Override
     public String toString() {
         return String.format("odesilatel:%s prijemce:%s id zpravy:%s predmet zpravy:%s",
-                sender.getIdentity(), recipient.getIdentity(), id, annotation);
+                sender, recipient, id, annotation);
     }
 
     public String getDmType() {
@@ -205,4 +205,20 @@ public class MessageEnvelope implements Serializable {
         this.toHands = toHands;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof MessageEnvelope)) {
+            return false;
+        }
+        MessageEnvelope that = (MessageEnvelope) o;
+        return id != null ? id.equals(that.id) : that.id == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
+    }
 }

@@ -66,12 +66,12 @@ public class DataBoxSearchServiceImpl implements DataBoxSearchService {
     }
 
     public DataBoxState checkDataBox(DataBox db) {
-        String id = db.getdataBoxID();
+        String id = db.getDataBoxID();
         Holder<Integer> dbState = new Holder<Integer>();
         Holder<TDbReqStatus> status = new Holder<TDbReqStatus>();
         service.checkDataBox(id, true, "", dbState, status);
         ErrorHandling.throwIfError(String.format("Chyba pri zjistovani stavu schranky "
-                + "s id=%s.", db.getdataBoxID()), status.value);
+                + "s id=%s.", db.getDataBoxID()), status.value);
         return DataBoxState.create(dbState.value);
     }
 

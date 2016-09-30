@@ -54,7 +54,7 @@ public class Validator {
         if (env.getRecipient() == null) {
             throw new IllegalArgumentException("Zprava nema prijemce.");
         }
-        if (env.getRecipient().getdataBoxID() == null) {
+        if (env.getRecipient().getDataBoxID() == null) {
             throw new IllegalArgumentException("ID prijemce zpravy je null.");
         }
         List<Attachment> attachments = message.getAttachments();

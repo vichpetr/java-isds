@@ -33,7 +33,7 @@ public class DataBoxUploadServiceImpl implements DataBoxUploadService {
     public void sendMessage(Message message) {
         Validator.assertValidMessageForSending(message);
         DmEnvelope envelope = new DmEnvelope();
-        envelope.setDbIDRecipient(message.getEnvelope().getRecipient().getdataBoxID());
+        envelope.setDbIDRecipient(message.getEnvelope().getRecipient().getDataBoxID());
         envelope.setDmAnnotation(message.getEnvelope().getAnnotation());
 
         // Process legal title

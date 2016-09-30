@@ -44,7 +44,7 @@ public class DataBox implements Serializable {
     /**
      * Vrátí jednoznačné ID schránky.
      */
-    public String getdataBoxID() {
+    public String getDataBoxID() {
 	return dataBoxID;
     }
 
