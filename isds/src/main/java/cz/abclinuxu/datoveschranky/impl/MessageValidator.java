@@ -62,11 +62,11 @@ import org.xml.sax.helpers.XMLFilterImpl;
 /**
  * Třída pro práci s podepsanými zprávami, umožňuje ověření podpisu a časového
  * razítka, extrakci příloh z podepsané zprávy a výpočet haše zprávy.
- * 
- * 
+ *
+ *
  * TODO: Rozhrání a implementace této třídy přejde předělat, nyní slouží pouze za
  * účelem testování. Implementace je neefektivní.
- * 
+ *
  * @author xrosecky
  */
 public class MessageValidator {
@@ -86,26 +86,11 @@ public class MessageValidator {
     }
 
     /**
-     * Na vstup dostane podepsanou zprávu v binárním formátu PKCS#7 (žádné XML),
-     * a vrátí zprávu včetně příloh při splnění následujících podmínek:
-     * 
-     * - zpráva je podepsaná platným certifikátem
-     * - časové razítko je podepsané platným certifikátem
-     * - haš časového razítka a haš zprávy (element dmHash) jsou totožné a
-     *   souhlasí se spočítaným hašem ze zprávy způsobem definovaným
-     *   v dokumentaci k ISDS.
-     * 
-     * Validace zpráv probíha proti certifikátům, které jsou předány při
-     * volání konstruktoru této třídy, ne proti přiloženým certifikátům k
-     * časovému razítku či podpisu zprávy.
-     * 
-     * Pokud zpráva nesplnuje výše uvedené podmínky, je vyhozena vyjímka
-     * DataBoxException s detailním popisem chyby.
-     * 
-     * @param  asPKCS7  zpráva v obalu PKCS#7
-     * @return  zpráva včetně příloh
-     * @throws DataBoxException při neúspěšné validaci
-     * 
+     * Wrapper nad metodou {@link MessageValidator#validateAndCreateMessage(byte[], AttachmentStorer, boolean)}.
+     * @param content PKCS podepsany obsah
+     * @param storer uloziste pro prilohy
+     * @return instance zpravy ze zfo souboru
+     * @throws IOException
      */
     public Message validateAndCreateMessage(Content content, AttachmentStorer storer) throws IOException {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -123,8 +108,30 @@ public class MessageValidator {
         return this.validateAndCreateMessage(content, storer, false);
     }
 
-    public Message validateAndCreateMessage(byte[] asPCKS7, AttachmentStorer storer, boolean checkHash) throws DataBoxException {
-        byte[] asXML = validator.readPKCS7(asPCKS7);
+    /**
+     * Na vstup dostane podepsanou zprávu v binárním formátu PKCS#7 (žádné XML),
+     * a vrátí zprávu včetně příloh při splnění následujících podmínek:
+     *
+     * - zpráva je podepsaná platným certifikátem
+     * - časové razítko je podepsané platným certifikátem
+     * - haš časového razítka a haš zprávy (element dmHash) jsou totožné a
+     *   souhlasí se spočítaným hašem ze zprávy způsobem definovaným
+     *   v dokumentaci k ISDS.
+     *
+     * Validace zpráv probíha proti certifikátům, které jsou předány při
+     * volání konstruktoru této třídy, ne proti přiloženým certifikátům k
+     * časovému razítku či podpisu zprávy.
+     *
+     * Pokud zpráva nesplnuje výše uvedené podmínky, je vyhozena vyjímka
+     * DataBoxException s detailním popisem chyby.
+     *
+     * @param  asPKCS7  zpráva v obalu PKCS#7
+     * @return  zpráva včetně příloh
+     * @throws DataBoxException při neúspěšné validaci
+     *
+     */
+    public Message validateAndCreateMessage(byte[] asPKCS7, AttachmentStorer storer, boolean checkHash) throws DataBoxException {
+        byte[] asXML = validator.readPKCS7(asPKCS7);
         MarshallerResult result = null;
         try {
             result = load(TMessDownOutput.class, asXML);
@@ -174,18 +181,18 @@ public class MessageValidator {
     /**
      * Spočítá haš zprávy jak je definován v ISDS u zprávy v XMLku, tzn.
      * od elementu <p:dmDm> až po </p:dmDm> včetně (od zobáčku po zobáček).
-     * 
+     *
      * DOM ani SAX nezachovává fyzickou strukturu, např. mezery oddělujíci
      * atributy (třeba "<a href='bla bla'/>" vs "<a    href='bla bla'/>" ) a haš v
      * takovém případě by nevyšel, takže se na to musí jít takhle přímo, tzn. najít
-     * v posloupnosti bytů počátek elementu <p:dmDm> a konec elementu </p:dmDm> a 
+     * v posloupnosti bytů počátek elementu <p:dmDm> a konec elementu </p:dmDm> a
      * z této posloupnosti vypočítat haš zprávy.
-     * 
+     *
      * TODO: místo pole bajtů to bude akceptovat InputStream a hledat začátek
      * a konec pomocí stavového automatu a obsah mezi nimi po částech pumpovat
      * do hašovací funkce, takže spočítání haše bude efektivní z hlediska času
      * a paměti, ne jako tohle, kde alokuji velký String v paměti...
-     * 
+     *
      */
     static Hash computeMessageHash(byte[] messageInXML, String algorithm) throws DataBoxException {
         try {
@@ -296,7 +303,7 @@ public class MessageValidator {
 					} else {
 						throw new IllegalArgumentException(
 								"both file.getDmEncodedContent() "
-										+ "and file.getDmXMLContent() are null, messageId is " 
+										+ "and file.getDmXMLContent() are null, messageId is "
 										+ envelope.getMessageID());
                     }
                 } finally {
@@ -377,7 +384,7 @@ public class MessageValidator {
         SAXSource source = new SAXSource(xmlFilter, new InputSource(new ByteArrayInputStream(what)));
         return new MarshallerResult(unmarshaller.unmarshal(source), xmlFilter.rootURI);
     }
-    
+
     protected static byte[] toByteArray(Element element) {
 		try {
     	  Source source = new DOMSource(element);
