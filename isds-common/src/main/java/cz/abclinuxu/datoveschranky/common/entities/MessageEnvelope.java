@@ -4,9 +4,8 @@ import java.io.Serializable;
 import java.util.GregorianCalendar;
 
 /**
- *
  * Obálka zprávy, neobsahuje přílohy (viz třída Attachment).
- * 
+ *
  * @author Vaclav Rosecky &lt;xrosecky 'at' gmail 'dot' com&gt;
  */
 public class MessageEnvelope implements Serializable {
@@ -55,7 +54,7 @@ public class MessageEnvelope implements Serializable {
     }
 
     /**
-     * Vrátí předmět zprávy. 
+     * Vrátí předmět zprávy.
      */
     public String getAnnotation() {
         return annotation;
@@ -66,7 +65,7 @@ public class MessageEnvelope implements Serializable {
     }
 
     /**
-     * Vrátí příjemce zprávy. 
+     * Vrátí příjemce zprávy.
      */
     public DataBox getRecipient() {
         return recipient;
@@ -161,8 +160,15 @@ public class MessageEnvelope implements Serializable {
 
     @Override
     public String toString() {
-        return String.format("odesilatel:%s prijemce:%s id zpravy:%s predmet zpravy:%s",
-                sender, recipient, id, annotation);
+        final StringBuilder sb = new StringBuilder("MessageEnvelope{");
+        sb.append("id='").append(id).append('\'');
+        sb.append(", sender=").append(sender);
+        sb.append(", recipient=").append(recipient);
+        sb.append(", type=").append(type);
+        sb.append(", state=").append(state);
+        sb.append(", annotation='").append(annotation).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 
     public String getDmType() {

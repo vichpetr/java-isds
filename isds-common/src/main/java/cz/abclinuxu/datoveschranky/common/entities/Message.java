@@ -4,15 +4,14 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- *
  * Celá zpráva, tzn. obálka zprávy + přílohy
- * 
+ *
  * @author Vaclav Rosecky &lt;xrosecky 'at' gmail 'dot' com&gt;
  */
 public class Message implements Serializable {
 
     private static final long serialVersionUID = 5L;
-    
+
     protected MessageEnvelope envelope = null;
     protected TimeStamp timeStamp = null;
     protected Hash hash = null;
@@ -20,12 +19,12 @@ public class Message implements Serializable {
 
     public Message() {
     }
-    
+
     public Message(MessageEnvelope env, List<Attachment> attachs) {
         this.envelope = env;
         this.attachments = attachs;
     }
-    
+
     public Message(MessageEnvelope envelope, TimeStamp ts, Hash hs, List<Attachment> attachments) {
         this.envelope = envelope;
         this.timeStamp = ts;
@@ -64,6 +63,15 @@ public class Message implements Serializable {
 
     public void setTimeStamp(TimeStamp timeStamp) {
         this.timeStamp = timeStamp;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Message{");
+        sb.append("envelope=").append(envelope);
+        sb.append(", attachments: ").append(attachments);
+        sb.append('}');
+        return sb.toString();
     }
 
     @Override

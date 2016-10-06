@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * Reprezentuje datovou schránku.
- * 
+ *
  * @author Vaclav Rosecky &lt;xrosecky 'at' gmail 'dot' com&gt;
  */
 public class DataBox implements Serializable {
@@ -19,74 +19,73 @@ public class DataBox implements Serializable {
     }
 
     public DataBox(String id) {
-	this.dataBoxID = id;
+        this.dataBoxID = id;
     }
 
     public DataBox(String id, String name, String adress) {
-	if (id == null) {
-	    throw new NullPointerException("id");
-	}
-	this.dataBoxID = id;
-	this.identity = name;
-	this.address = adress;
+        if (id == null) {
+            throw new NullPointerException("id");
+        }
+        this.dataBoxID = id;
+        this.identity = name;
+        this.address = adress;
     }
 
     public DataBox(String id, DataBoxType dataBoxType, String name, String adress) {
-	if (id == null) {
-	    throw new NullPointerException("id");
-	}
-	this.dataBoxID = id;
-	this.identity = name;
-	this.address = adress;
-	this.dataBoxType = dataBoxType;
+        if (id == null) {
+            throw new NullPointerException("id");
+        }
+        this.dataBoxID = id;
+        this.identity = name;
+        this.address = adress;
+        this.dataBoxType = dataBoxType;
     }
 
     /**
      * Vrátí jednoznačné ID schránky.
      */
     public String getDataBoxID() {
-	return dataBoxID;
+        return dataBoxID;
     }
 
     public void setDataBoxID(String newID) {
-	Validator.assertNotNull(newID);
-	Validator.assertValidDataBoxID(newID);
-	this.dataBoxID = newID;
+        Validator.assertNotNull(newID);
+        Validator.assertValidDataBoxID(newID);
+        this.dataBoxID = newID;
     }
 
     /**
      * Jméno majitele datové schránky.
      */
     public String getIdentity() {
-	return identity;
+        return identity;
     }
 
     public void setIdentity(String identity) {
-	this.identity = identity;
+        this.identity = identity;
     }
 
     /**
      * Adresa majitele datové schránky
      */
     public String getAddress() {
-	return address;
+        return address;
     }
 
     public void setAddress(String address) {
-	this.address = address;
+        this.address = address;
     }
 
     @Override
     public String toString() {
-	return String.format("Uzivatel:%s, id schranky:%s adresa:%s", identity, dataBoxID, address);
+        return String.format("DataBox{id='%s'}", dataBoxID);
     }
 
     public DataBoxType getDataBoxType() {
-	return dataBoxType;
+        return dataBoxType;
     }
 
     public void setDataBoxType(DataBoxType type) {
-	dataBoxType = type;
+        dataBoxType = type;
     }
-
 }
