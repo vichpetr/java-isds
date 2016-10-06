@@ -1,4 +1,18 @@
-# JAVA_ISDS
+# Java ISDS
+
+[![Build Status](https://travis-ci.org/czgov/java-isds.svg?branch=master)](https://travis-ci.org/czgov/java-isds)
+
+Original project [JAVA_ISDS](https://github.com/xrosecky/JAVA_ISDS) was developed by Vaclav Rosecky.  
+Goal of this fork is to provide stable builds in Maven Central and continuous integration on Travis CI.
+
+Original javadoc and documentation was written in Czech language.
+
+
+
+## Contributions
+We welcome contributions of all kinds. 
+
+## Original library description in Czech language
 
 *Multiplatformní knihovna v Javě pro přístup k ISDS (informačnímu systému datových schránek).*
 
@@ -16,9 +30,5 @@ nejsou podporovány.
 odesílání zpráv, ověření integrity stažených zpráv, vyhledávání datových
 schránek a podobně.
 
-Build se provádí mavenem, takže jen stačí spustit příkaz "mvn package" a ten se
+Build se provádí mavenem, takže jen stačí spustit příkaz `mvn clean install` a ten se
 o vše potřebné postará.
-
-## Continuous Integration
-
-CI server hosted on Travis-ci.org: [![Build Status](https://travis-ci.org/czgov/JAVA_ISDS.svg?branch=master)](https://travis-ci.org/czgov/JAVA_ISDS)
