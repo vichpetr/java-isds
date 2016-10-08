@@ -26,9 +26,9 @@
   </licenses>
 
   <scm>
-    <connection>scm:git:git://github.com:czgov/java-isds.git</connection>
-    <developerConnection>scm:git:ssh://github.com:simpligility/ossrh-demo.git</developerConnection>
     <url>https://github.com/czgov/java-isds</url>
+    <connection>scm:git:git://github.com/czgov/java-isds.git</connection>
+    <developerConnection>scm:git:git@github.com:czgov/java-isds.git</developerConnection>
   </scm>
 
   <distributionManagement>
