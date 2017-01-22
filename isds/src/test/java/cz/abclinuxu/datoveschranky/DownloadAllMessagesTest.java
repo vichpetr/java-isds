@@ -2,7 +2,7 @@ package cz.abclinuxu.datoveschranky;
 
 import cz.abclinuxu.datoveschranky.common.entities.Message;
 import cz.abclinuxu.datoveschranky.common.entities.MessageEnvelope;
-import cz.abclinuxu.datoveschranky.common.impl.ByteArrayAttachmentStorer;
+import cz.abclinuxu.datoveschranky.common.ByteArrayAttachmentStorer;
 import cz.abclinuxu.datoveschranky.common.interfaces.DataBoxDownloadService;
 import cz.abclinuxu.datoveschranky.common.interfaces.DataBoxMessagesService;
 import java.util.Calendar;

@@ -11,6 +11,7 @@
   <artifactId>isds-web-services</artifactId>
   <name>JavaISDS :: Web Services</name>
   <description>Entity classes generated from WSDL.</description>
+  <packaging>bundle</packaging>
 
   <dependencies>
     <dependency>

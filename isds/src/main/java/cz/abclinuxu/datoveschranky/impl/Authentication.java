@@ -1,8 +1,8 @@
 package cz.abclinuxu.datoveschranky.impl;
 
 import com.sun.xml.ws.developer.JAXWSProperties;
-import cz.abclinuxu.datoveschranky.common.impl.Config;
-import cz.abclinuxu.datoveschranky.common.impl.Utils;
+import cz.abclinuxu.datoveschranky.common.Config;
+import cz.abclinuxu.datoveschranky.common.Utils;
 import java.security.KeyStore;
 import java.util.Map;
 import java.util.logging.Logger;

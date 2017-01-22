@@ -1,4 +1,4 @@
-package cz.abclinuxu.datoveschranky.common.impl;
+package cz.abclinuxu.datoveschranky.common;
 
 import cz.abclinuxu.datoveschranky.common.interfaces.AttachmentStorer;
 import cz.abclinuxu.datoveschranky.common.entities.Attachment;

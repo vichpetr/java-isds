@@ -1,7 +1,7 @@
 package cz.abclinuxu.datoveschranky.impl;
 
-import cz.abclinuxu.datoveschranky.common.impl.Config;
-import cz.abclinuxu.datoveschranky.common.impl.DataBoxException;
+import cz.abclinuxu.datoveschranky.common.Config;
+import cz.abclinuxu.datoveschranky.common.DataBoxException;
 import java.security.KeyStore;
 import java.util.Map;
 import javax.xml.ws.BindingProvider;

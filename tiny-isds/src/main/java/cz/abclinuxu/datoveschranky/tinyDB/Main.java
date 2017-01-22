@@ -1,12 +1,12 @@
 package cz.abclinuxu.datoveschranky.tinyDB;
 
-import cz.abclinuxu.datoveschranky.common.impl.Utils;
-import cz.abclinuxu.datoveschranky.common.impl.FileAttachmentStorer;
+import cz.abclinuxu.datoveschranky.common.Utils;
+import cz.abclinuxu.datoveschranky.common.FileAttachmentStorer;
 import cz.abclinuxu.datoveschranky.common.entities.Attachment;
 import cz.abclinuxu.datoveschranky.common.entities.DataBox;
 import cz.abclinuxu.datoveschranky.common.entities.Hash;
 import cz.abclinuxu.datoveschranky.common.entities.MessageEnvelope;
-import cz.abclinuxu.datoveschranky.common.impl.Config;
+import cz.abclinuxu.datoveschranky.common.Config;
 import cz.abclinuxu.datoveschranky.common.interfaces.DataBoxDownloadService;
 import cz.abclinuxu.datoveschranky.common.interfaces.DataBoxMessagesService;
 import cz.abclinuxu.datoveschranky.common.interfaces.DataBoxServices;

@@ -4,18 +4,22 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>cz.abclinuxu.datoveschranky</groupId>
   <artifactId>java-isds</artifactId>
-  <packaging>pom</packaging>
   <version>1.0.0-SNAPSHOT</version>
 
   <name>JavaISDS</name>
   <description>JavaISDS build POM</description>
   <url>https://github.com/czgov/java-isds</url>
+  <packaging>pom</packaging>
 
   <properties>
     <!-- maven project settings -->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.5</maven.compiler.source>
     <maven.compiler.target>1.5</maven.compiler.target>
+
+    <maven.bundle.plugin.version>3.2.0</maven.bundle.plugin.version>
+    <osgi.import />
+    <osgi.export />
   </properties>
 
   <licenses>
@@ -111,6 +115,55 @@
             <id>attach-sources</id>
             <goals>
               <goal>jar-no-fork</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <version>${maven.bundle.plugin.version}</version>
+        <extensions>true</extensions>
+        <configuration>
+          <!--<excludeDependencies>${camel.osgi.exclude.dependencies}</excludeDependencies>-->
+          <instructions>
+            <Bundle-Name>${project.name}</Bundle-Name>
+            <Bundle-SymbolicName>${project.groupId}.${project.artifactId}</Bundle-SymbolicName>
+            <!--<Bundle-Activator>${camel.osgi.activator}</Bundle-Activator>-->
+            <!--<Export-Package>${osgi.export}</Export-Package>-->
+            <!--<Import-Package>${osgi.import}</Import-Package>-->
+            <!--<DynamicImport-Package>${camel.osgi.dynamic}</DynamicImport-Package>-->
+            <!--<Private-Package>${camel.osgi.private.pkg}</Private-Package>-->
+            <!--<Import-Service>${camel.osgi.import.service}</Import-Service>-->
+            <!--<Export-Service>${camel.osgi.export.service}</Export-Service>-->
+            <!--<Require-Capability>${camel.osgi.require.capability}</Require-Capability>-->
+            <!--<Provide-Capability>${camel.osgi.provide.capability}</Provide-Capability>-->
+            <Implementation-Title>Java ISDS</Implementation-Title>
+            <Implementation-Version>${project.version}</Implementation-Version>
+            <!--<Karaf-Info>Camel;${project.artifactId}=${project.version}</Karaf-Info>-->
+            <!--<_versionpolicy>${camel.osgi.import.default.version}</_versionpolicy>-->
+            <!--<_failok>${camel.osgi.failok}</_failok>-->
+          </instructions>
+        </configuration>
+        <executions>
+          <execution>
+            <id>versions</id>
+            <phase>validate</phase>
+            <goals>
+              <goal>cleanVersions</goal>
+            </goals>
+            <configuration>
+              <versions>
+                <camel.osgi.version.clean>${project.version}</camel.osgi.version.clean>
+              </versions>
+            </configuration>
+          </execution>
+          <execution>
+            <id>bundle-manifest</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>manifest</goal>
             </goals>
           </execution>
         </executions>

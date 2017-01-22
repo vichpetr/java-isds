@@ -5,8 +5,8 @@
 package cz.abclinuxu.datoveschranky.impl;
 
 import com.sun.xml.ws.developer.JAXWSProperties;
-import cz.abclinuxu.datoveschranky.common.impl.Config;
-import cz.abclinuxu.datoveschranky.common.impl.DataBoxException;
+import cz.abclinuxu.datoveschranky.common.Config;
+import cz.abclinuxu.datoveschranky.common.DataBoxException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;

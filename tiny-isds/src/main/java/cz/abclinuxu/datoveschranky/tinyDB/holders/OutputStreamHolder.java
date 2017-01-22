@@ -1,6 +1,6 @@
 package cz.abclinuxu.datoveschranky.tinyDB.holders;
 
-import cz.abclinuxu.datoveschranky.common.impl.Utils;
+import cz.abclinuxu.datoveschranky.common.Utils;
 import java.io.BufferedWriter;
 import java.io.Closeable;
 import java.io.IOException;

@@ -9,7 +9,7 @@ import cz.abclinuxu.datoveschranky.common.entities.MessageState;
 import cz.abclinuxu.datoveschranky.common.entities.MessageStateChange;
 import cz.abclinuxu.datoveschranky.common.entities.MessageType;
 import cz.abclinuxu.datoveschranky.common.entities.content.ByteContent;
-import cz.abclinuxu.datoveschranky.common.impl.ByteArrayAttachmentStorer;
+import cz.abclinuxu.datoveschranky.common.ByteArrayAttachmentStorer;
 import cz.abclinuxu.datoveschranky.common.interfaces.DataBoxServices;
 import cz.abclinuxu.datoveschranky.common.interfaces.DataBoxUploadService;
 import cz.abclinuxu.datoveschranky.impl.MessageValidator;
