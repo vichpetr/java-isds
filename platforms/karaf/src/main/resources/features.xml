@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.2.0" name='javaisds-${project.version}'>
+
+  <feature name='isds' version='${project.version}' resolver='(obr)'>
+    <!-- bouncycastle could be dependency=true but there is possible wiring chian conflict with another bc version in fuse -->
+    <bundle>mvn:org.bouncycastle/bcprov-jdk15/${bouncycastle-version}</bundle>
+    <bundle>mvn:org.bouncycastle/bcmail-jdk15/${bouncycastle-version}</bundle>
+    <bundle>mvn:org.bouncycastle/bctsp-jdk15/${bouncycastle-version}</bundle>
+    <bundle>mvn:${project.groupId}/isds-common/${project.version}</bundle>
+    <bundle>mvn:${project.groupId}/isds-web-services/${project.version}</bundle>
+    <bundle>mvn:${project.groupId}/isds/${project.version}</bundle>
+  </feature>
+
+</features>

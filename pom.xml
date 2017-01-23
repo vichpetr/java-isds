@@ -17,7 +17,8 @@
     <maven.compiler.source>1.5</maven.compiler.source>
     <maven.compiler.target>1.5</maven.compiler.target>
 
-    <maven.bundle.plugin.version>3.2.0</maven.bundle.plugin.version>
+    <maven-bundle-plugin-version>3.2.0</maven-bundle-plugin-version>
+    <bouncycastle-version>1.46</bouncycastle-version>
     <osgi.import />
     <osgi.export />
   </properties>
@@ -81,6 +82,7 @@
     <module>isds</module>
     <module>message-viewer</module>
     <module>examples</module>
+	  <module>platforms</module>
   </modules>
 
   <build>
@@ -123,7 +125,7 @@
       <plugin>
         <groupId>org.apache.felix</groupId>
         <artifactId>maven-bundle-plugin</artifactId>
-        <version>${maven.bundle.plugin.version}</version>
+        <version>${maven-bundle-plugin-version}</version>
         <extensions>true</extensions>
         <configuration>
           <!--<excludeDependencies>${camel.osgi.exclude.dependencies}</excludeDependencies>-->
