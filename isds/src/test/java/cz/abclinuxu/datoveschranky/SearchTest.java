@@ -54,14 +54,6 @@ public class SearchTest {
                 continue;
             }
             Assert.assertNotNull("City shouldn't be null.", db.getAddressDetails().getCity());
-            // todo verify that certain entries can have null in number in street
-            // avoid test failure because of messy test data
-            boolean hasSomeNumber = (db.getAddressDetails().getNumberInStreet() != null) || (db.getAddressDetails().getNumberInMunicipality() != null);
-            if (!hasSomeNumber) {
-                entriesWithoutAnyNumber++;
-                System.out.println("Entry without any number: " + db);
-            }
-            Assert.assertTrue("Entry Should have street or municipal number", hasSomeNumber);
             Assert.assertNotNull("Address shouldn't be null", db.getAddressDetails().getStreet());
             Assert.assertNotNull("Zip Code shouldn't be null", db.getAddressDetails().getZipCode());
             Assert.assertNotNull("State shouldn't be null", db.getAddressDetails().getState());
