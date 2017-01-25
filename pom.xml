@@ -19,8 +19,12 @@
 
     <maven-bundle-plugin-version>3.2.0</maven-bundle-plugin-version>
     <bouncycastle-version>1.46</bouncycastle-version>
-    <osgi.import />
-    <osgi.export />
+
+    <!-- * -> detect imports and exports by maven bundle plugin -->
+    <osgi.import.default>*</osgi.import.default>
+    <osgi.export.default>cz.abclinuxu.datoveschranky.*</osgi.export.default>
+    <osgi.import>${osgi.import.default}</osgi.import>
+    <osgi.export>${osgi.export.default}</osgi.export>
   </properties>
 
   <licenses>
@@ -88,41 +92,6 @@
   <build>
     <plugins>
       <plugin>
-        <!-- generate javadoc -->
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-javadoc-plugin</artifactId>
-        <configuration>
-          <author>true</author>
-          <defaultAuthor>Vaclav Rosecky</defaultAuthor>
-          <!-- current JavaDocs produce lot of warnings and fail the build on Java8 -->
-          <additionalparam>-Xdoclint:none</additionalparam>
-        </configuration>
-        <executions>
-          <execution>
-            <id>attach-javadocs</id>
-            <goals>
-              <goal>jar</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-
-      <plugin>
-        <!-- generate source jar -->
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-source-plugin</artifactId>
-        <version>2.2.1</version>
-        <executions>
-          <execution>
-            <id>attach-sources</id>
-            <goals>
-              <goal>jar-no-fork</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-
-      <plugin>
         <groupId>org.apache.felix</groupId>
         <artifactId>maven-bundle-plugin</artifactId>
         <version>${maven-bundle-plugin-version}</version>
@@ -133,8 +102,8 @@
             <Bundle-Name>${project.name}</Bundle-Name>
             <Bundle-SymbolicName>${project.groupId}.${project.artifactId}</Bundle-SymbolicName>
             <!--<Bundle-Activator>${camel.osgi.activator}</Bundle-Activator>-->
-            <!--<Export-Package>${osgi.export}</Export-Package>-->
-            <!--<Import-Package>${osgi.import}</Import-Package>-->
+            <Import-Package>${osgi.import}</Import-Package>
+            <Export-Package>${osgi.export}</Export-Package>
             <!--<DynamicImport-Package>${camel.osgi.dynamic}</DynamicImport-Package>-->
             <!--<Private-Package>${camel.osgi.private.pkg}</Private-Package>-->
             <!--<Import-Service>${camel.osgi.import.service}</Import-Service>-->
@@ -178,6 +147,41 @@
       <id>release</id>
       <build>
         <plugins>
+          <plugin>
+            <!-- generate javadoc -->
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <configuration>
+              <author>true</author>
+              <defaultAuthor>Vaclav Rosecky</defaultAuthor>
+              <!-- current JavaDocs produce lot of warnings and fail the build on Java8 -->
+              <additionalparam>-Xdoclint:none</additionalparam>
+            </configuration>
+            <executions>
+              <execution>
+                <id>attach-javadocs</id>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+
+          <plugin>
+            <!-- generate source jar -->
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-source-plugin</artifactId>
+            <version>2.2.1</version>
+            <executions>
+              <execution>
+                <id>attach-sources</id>
+                <goals>
+                  <goal>jar-no-fork</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+
           <plugin>
             <!-- sign artifacts when releasing -->
             <groupId>org.apache.maven.plugins</groupId>
