@@ -18,7 +18,7 @@
     <maven.compiler.target>1.5</maven.compiler.target>
 
     <maven-bundle-plugin-version>3.2.0</maven-bundle-plugin-version>
-    <bouncycastle-version>1.46</bouncycastle-version>
+    <bouncycastle-version>1.54</bouncycastle-version>
 
     <!-- * -> detect imports and exports by maven bundle plugin -->
     <osgi.import.default>*</osgi.import.default>

@@ -49,21 +49,18 @@ public class Hash implements Serializable {
 
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof Hash)) {
-            return false;
-        }
         if (this == obj) {
             return true;
         }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
         Hash other = (Hash) obj;
-        return this.getAlgorithm().equals(other.getAlgorithm()) && Arrays.equals(this.getHash(), other.getHash());
+        return Arrays.equals(hash, other.hash);
     }
 
     @Override
     public int hashCode() {
-        return hash.hashCode();
+        return Arrays.hashCode(hash);
     }
-    
-    
-    
 }
