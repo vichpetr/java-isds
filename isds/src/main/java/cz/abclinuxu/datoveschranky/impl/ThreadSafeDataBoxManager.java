@@ -1,6 +1,6 @@
 package cz.abclinuxu.datoveschranky.impl;
 
-import cz.abclinuxu.datoveschranky.common.impl.Config;
+import cz.abclinuxu.datoveschranky.common.Config;
 import cz.abclinuxu.datoveschranky.common.interfaces.DataBoxAccessService;
 import cz.abclinuxu.datoveschranky.common.interfaces.DataBoxDownloadService;
 import cz.abclinuxu.datoveschranky.common.interfaces.DataBoxMessagesService;

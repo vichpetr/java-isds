@@ -3,7 +3,7 @@ package cz.abclinuxu.datoveschranky.common.entities;
 import java.io.Serializable;
 
 import cz.abclinuxu.datoveschranky.common.entities.content.Content;
-import cz.abclinuxu.datoveschranky.common.impl.MimeTypes;
+import cz.abclinuxu.datoveschranky.common.MimeTypes;
 
 /**
  * Reprezentuje jednu přílohu zprávy.

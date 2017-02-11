@@ -5,7 +5,7 @@ import cz.abclinuxu.datoveschranky.common.entities.Hash;
 import cz.abclinuxu.datoveschranky.common.entities.MessageEnvelope;
 import cz.abclinuxu.datoveschranky.common.entities.MessageState;
 import cz.abclinuxu.datoveschranky.common.entities.MessageStateChange;
-import cz.abclinuxu.datoveschranky.common.impl.DataBoxException;
+import cz.abclinuxu.datoveschranky.common.DataBoxException;
 import java.io.OutputStream;
 import java.util.Date;
 import java.util.EnumSet;

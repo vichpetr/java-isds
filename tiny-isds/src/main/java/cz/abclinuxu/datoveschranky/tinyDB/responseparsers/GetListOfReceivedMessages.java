@@ -1,6 +1,5 @@
 package cz.abclinuxu.datoveschranky.tinyDB.responseparsers;
 
-import cz.abclinuxu.datoveschranky.common.impl.Utils;
 import cz.abclinuxu.datoveschranky.common.entities.MessageEnvelope;
 import cz.abclinuxu.datoveschranky.tinyDB.XMLUtils;
 import cz.abclinuxu.datoveschranky.tinyDB.holders.OutputHolder;

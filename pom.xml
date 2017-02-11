@@ -4,18 +4,27 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>cz.abclinuxu.datoveschranky</groupId>
   <artifactId>java-isds</artifactId>
-  <packaging>pom</packaging>
   <version>1.0.0-SNAPSHOT</version>
 
   <name>JavaISDS</name>
   <description>JavaISDS build POM</description>
   <url>https://github.com/czgov/java-isds</url>
+  <packaging>pom</packaging>
 
   <properties>
     <!-- maven project settings -->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.5</maven.compiler.source>
     <maven.compiler.target>1.5</maven.compiler.target>
+
+    <maven-bundle-plugin-version>3.2.0</maven-bundle-plugin-version>
+    <bouncycastle-version>1.54</bouncycastle-version>
+
+    <!-- * -> detect imports and exports by maven bundle plugin -->
+    <osgi.import.default>*</osgi.import.default>
+    <osgi.export.default>cz.abclinuxu.datoveschranky.*</osgi.export.default>
+    <osgi.import>${osgi.import.default}</osgi.import>
+    <osgi.export>${osgi.export.default}</osgi.export>
   </properties>
 
   <licenses>
@@ -77,40 +86,55 @@
     <module>isds</module>
     <module>message-viewer</module>
     <module>examples</module>
+	  <module>platforms</module>
   </modules>
 
   <build>
     <plugins>
       <plugin>
-        <!-- generate javadoc -->
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-javadoc-plugin</artifactId>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <version>${maven-bundle-plugin-version}</version>
+        <extensions>true</extensions>
         <configuration>
-          <author>true</author>
-          <defaultAuthor>Vaclav Rosecky</defaultAuthor>
-          <!-- current JavaDocs produce lot of warnings and fail the build on Java8 -->
-          <additionalparam>-Xdoclint:none</additionalparam>
+          <!--<excludeDependencies>${camel.osgi.exclude.dependencies}</excludeDependencies>-->
+          <instructions>
+            <Bundle-Name>${project.name}</Bundle-Name>
+            <Bundle-SymbolicName>${project.groupId}.${project.artifactId}</Bundle-SymbolicName>
+            <!--<Bundle-Activator>${camel.osgi.activator}</Bundle-Activator>-->
+            <Import-Package>${osgi.import}</Import-Package>
+            <Export-Package>${osgi.export}</Export-Package>
+            <!--<DynamicImport-Package>${camel.osgi.dynamic}</DynamicImport-Package>-->
+            <!--<Private-Package>${camel.osgi.private.pkg}</Private-Package>-->
+            <!--<Import-Service>${camel.osgi.import.service}</Import-Service>-->
+            <!--<Export-Service>${camel.osgi.export.service}</Export-Service>-->
+            <!--<Require-Capability>${camel.osgi.require.capability}</Require-Capability>-->
+            <!--<Provide-Capability>${camel.osgi.provide.capability}</Provide-Capability>-->
+            <Implementation-Title>Java ISDS</Implementation-Title>
+            <Implementation-Version>${project.version}</Implementation-Version>
+            <!--<Karaf-Info>Camel;${project.artifactId}=${project.version}</Karaf-Info>-->
+            <!--<_versionpolicy>${camel.osgi.import.default.version}</_versionpolicy>-->
+            <!--<_failok>${camel.osgi.failok}</_failok>-->
+          </instructions>
         </configuration>
         <executions>
           <execution>
-            <id>attach-javadocs</id>
+            <id>versions</id>
+            <phase>validate</phase>
             <goals>
-              <goal>jar</goal>
+              <goal>cleanVersions</goal>
             </goals>
+            <configuration>
+              <versions>
+                <camel.osgi.version.clean>${project.version}</camel.osgi.version.clean>
+              </versions>
+            </configuration>
           </execution>
-        </executions>
-      </plugin>
-
-      <plugin>
-        <!-- generate source jar -->
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-source-plugin</artifactId>
-        <version>2.2.1</version>
-        <executions>
           <execution>
-            <id>attach-sources</id>
+            <id>bundle-manifest</id>
+            <phase>prepare-package</phase>
             <goals>
-              <goal>jar-no-fork</goal>
+              <goal>manifest</goal>
             </goals>
           </execution>
         </executions>
@@ -123,6 +147,41 @@
       <id>release</id>
       <build>
         <plugins>
+          <plugin>
+            <!-- generate javadoc -->
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <configuration>
+              <author>true</author>
+              <defaultAuthor>Vaclav Rosecky</defaultAuthor>
+              <!-- current JavaDocs produce lot of warnings and fail the build on Java8 -->
+              <additionalparam>-Xdoclint:none</additionalparam>
+            </configuration>
+            <executions>
+              <execution>
+                <id>attach-javadocs</id>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+
+          <plugin>
+            <!-- generate source jar -->
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-source-plugin</artifactId>
+            <version>2.2.1</version>
+            <executions>
+              <execution>
+                <id>attach-sources</id>
+                <goals>
+                  <goal>jar-no-fork</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+
           <plugin>
             <!-- sign artifacts when releasing -->
             <groupId>org.apache.maven.plugins</groupId>

@@ -1,7 +1,6 @@
 package cz.abclinuxu.datoveschranky.common;
 
 import cz.abclinuxu.datoveschranky.common.entities.Attachment;
-import cz.abclinuxu.datoveschranky.common.impl.MimeTypes;
 import junit.framework.Assert;
 import junit.framework.TestCase;
 

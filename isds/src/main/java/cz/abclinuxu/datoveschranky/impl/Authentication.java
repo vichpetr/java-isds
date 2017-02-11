@@ -1,14 +1,15 @@
 package cz.abclinuxu.datoveschranky.impl;
 
-import com.sun.xml.ws.developer.JAXWSProperties;
-import cz.abclinuxu.datoveschranky.common.impl.Config;
-import cz.abclinuxu.datoveschranky.common.impl.Utils;
-import java.security.KeyStore;
-import java.util.Map;
-import java.util.logging.Logger;
 import javax.net.ssl.SSLSocketFactory;
 import javax.xml.ws.BindingProvider;
 import javax.xml.ws.Service;
+
+import java.security.KeyStore;
+import java.util.Map;
+import java.util.logging.Logger;
+
+import cz.abclinuxu.datoveschranky.common.Config;
+import cz.abclinuxu.datoveschranky.common.Utils;
 
 /**
  *
@@ -16,6 +17,8 @@ import javax.xml.ws.Service;
  * 
  */
 public abstract class Authentication {
+    // copied from mvn:com.sun.xml.ws/jaxws-rt JAXWSProperties
+    public static final String SSL_SOCKET_FACTORY = "com.sun.xml.ws.transport.https.client.SSLSocketFactory";
 
     protected final Config config;
     // protected SSLSocketFactory socketFactory = null;
@@ -34,7 +37,7 @@ public abstract class Authentication {
     }
 
     protected void configureService(Map<String, Object> requestContext, String servicePostfix) {
-        requestContext.put(JAXWSProperties.SSL_SOCKET_FACTORY, this.createSSLSocketFactory());
+        requestContext.put(SSL_SOCKET_FACTORY, this.createSSLSocketFactory());
         requestContext.put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, config.getServiceURL() + servicePostfix);
         this.configureServiceOverride(requestContext, servicePostfix);
     }

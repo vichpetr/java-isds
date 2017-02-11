@@ -1,8 +1,8 @@
 package cz.abclinuxu.datoveschranky.examples;
 
 import cz.abclinuxu.datoveschranky.common.entities.MessageEnvelope;
-import cz.abclinuxu.datoveschranky.common.impl.Config;
-import cz.abclinuxu.datoveschranky.common.impl.DataBoxEnvironment;
+import cz.abclinuxu.datoveschranky.common.Config;
+import cz.abclinuxu.datoveschranky.common.DataBoxEnvironment;
 import cz.abclinuxu.datoveschranky.impl.Authentication;
 import cz.abclinuxu.datoveschranky.impl.BasicAuthentication;
 import cz.abclinuxu.datoveschranky.impl.DataBoxManager;

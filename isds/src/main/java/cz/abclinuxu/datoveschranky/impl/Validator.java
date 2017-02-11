@@ -2,23 +2,15 @@ package cz.abclinuxu.datoveschranky.impl;
 
 import cz.abclinuxu.datoveschranky.common.entities.Hash;
 import cz.abclinuxu.datoveschranky.common.entities.TimeStamp;
-import cz.abclinuxu.datoveschranky.common.impl.DataBoxException;
-import java.io.BufferedInputStream;
+import cz.abclinuxu.datoveschranky.common.DataBoxException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.math.BigInteger;
-import java.security.Principal;
 import java.security.Provider;
 import java.security.Security;
-import java.security.cert.CertificateException;
-import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.logging.Level;
+
 import org.apache.log4j.Logger;
 import org.bouncycastle.cms.CMSException;
 import org.bouncycastle.cms.CMSProcessable;
@@ -26,7 +18,12 @@ import org.bouncycastle.cms.CMSSignedData;
 import org.bouncycastle.cms.SignerId;
 import org.bouncycastle.cms.SignerInformation;
 import org.bouncycastle.cms.SignerInformationStore;
+import org.bouncycastle.cms.SignerInformationVerifier;
+import org.bouncycastle.cms.jcajce.JcaSimpleSignerInfoVerifierBuilder;
+import org.bouncycastle.cms.jcajce.JcaX509CertSelectorConverter;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
+import org.bouncycastle.operator.AlgorithmNameFinder;
+import org.bouncycastle.operator.DefaultAlgorithmNameFinder;
 import org.bouncycastle.tsp.TSPException;
 import org.bouncycastle.tsp.TimeStampToken;
 import org.bouncycastle.tsp.TimeStampTokenInfo;
@@ -34,19 +31,15 @@ import org.bouncycastle.tsp.TimeStampTokenInfo;
 /**
  *
  * Pomocná třída pro validaci časového razítka a podpisu zprávy. Jen prototyp!
- * 
+ *
  * @author Vaclav Rosecky &lt;xrosecky 'at' gmail 'dot' com&gt;
  */
 public class Validator {
 
-    private static Map<String, String> OIDToAlgorithmName = new HashMap<String, String>();
-    
+    private final AlgorithmNameFinder algorithmNameFinder = new DefaultAlgorithmNameFinder();
+
 
     static {
-        OIDToAlgorithmName.put("1.3.14.3.2.26", "SHA-1");
-        OIDToAlgorithmName.put("2.16.840.1.101.3.4.2.1", "SHA-256");
-        OIDToAlgorithmName.put("2.16.840.1.101.3.4.2.2", "SHA-384");
-        OIDToAlgorithmName.put("2.16.840.1.101.3.4.2.3", "SHA-512");
         Provider provider = new BouncyCastleProvider();
         Security.addProvider(provider);
     }
@@ -56,7 +49,7 @@ public class Validator {
 
     public Validator(Collection<X509Certificate> certs, boolean validating) {
         this.certs = certs;
-        isValidating = validating; 
+        isValidating = validating;
     }
 
     public Validator() {
@@ -72,7 +65,10 @@ public class Validator {
             X509Certificate cert = this.findCertificate(tst.getSID());
             if (isValidating) {
                 try {
-                    tst.validate(cert, "BC");
+                    SignerInformationVerifier verifier = new JcaSimpleSignerInfoVerifierBuilder()
+                            .setProvider(BouncyCastleProvider.PROVIDER_NAME)
+                            .build(cert);
+                    tst.validate(verifier);
                 } catch (Exception ex) {
                     if (ex instanceof RuntimeException) {
                         throw (RuntimeException) ex;
@@ -81,7 +77,7 @@ public class Validator {
                     }
                 }
             }
-            String algo = OIDToAlgorithmName.get(tsti.getMessageImprintAlgOID());
+            String algo = algorithmNameFinder.getAlgorithmName(tsti.getHashAlgorithm());
             byte[] hash = tsti.getMessageImprintDigest();
             return new TimeStamp(new Hash(algo, hash), cert, tsti.getGenTime());
         } catch (CMSException ex) {
@@ -121,22 +117,6 @@ public class Validator {
         }
     }
 
-    public static Collection<X509Certificate> readX509Certificates(InputStream is) {
-        List<X509Certificate> certs = new ArrayList<X509Certificate>();
-        BufferedInputStream bis = new BufferedInputStream(is);
-        try {
-            CertificateFactory cf = CertificateFactory.getInstance("X.509");
-            while (bis.available() > 0) {
-                certs.add((X509Certificate) cf.generateCertificate(bis));
-            }
-        } catch (CertificateException ce) {
-            throw new DataBoxException("Nemohu precist X.509 certifikat.", ce);
-        } catch (IOException ioe) {
-            throw new DataBoxException("IO chyba pri cteni X.509 certifikatu.", ioe);
-        }
-        return certs;
-    }
-    
     private void verifySignature(CMSSignedData data) throws Exception {
         if (isValidating) {
             SignerInformationStore signerStore = data.getSignerInfos();
@@ -146,7 +126,10 @@ public class Validator {
                 if (cert == null) {
                     throw new DataBoxException("Nemohu najit certifikat.");
                 }
-                if (!signer.verify(cert, "BC")) {
+                SignerInformationVerifier verifier = new JcaSimpleSignerInfoVerifierBuilder()
+                        .setProvider(BouncyCastleProvider.PROVIDER_NAME)
+                        .build(cert);
+                if (!signer.verify(verifier)) {
                     throw new DataBoxException("Nemohu overit oproti certifikatu stazenou zpravu.");
                 }
             }
@@ -154,17 +137,12 @@ public class Validator {
     }
 
     private X509Certificate findCertificate(SignerId signer) {
-        return this.findCertificate(signer.getIssuer(), signer.getSerialNumber());
+        // according to bouncycastle 1.56 release migration guide
+        // To convert from SignerIds and RecipientIds use the JcaX509CertSelectorConverter class.
+        // To convert from X509CertSelectors use the JcaX509SelectorConverter class.
+        JcaX509CertSelectorConverter converter = new JcaX509CertSelectorConverter();
+        logger.debug("Hledam certifikat pro " + String.valueOf(signer));
+        return converter.getCertSelector(signer).getCertificate();
     }
 
-    private X509Certificate findCertificate(Principal issuer, BigInteger serNumber) {
-        for (X509Certificate cert : certs) {
-            if (cert.getIssuerX500Principal().getName().equals(issuer.getName()) && cert.getSerialNumber().equals(serNumber)) {
-                return cert;
-            }
-        }
-        logger.info(String.format("Nemohu najit certifikat, vydavatel je %s "
-                +", seriove cislo je %d.", issuer.getName(), serNumber));
-        return null;
-    }
 }

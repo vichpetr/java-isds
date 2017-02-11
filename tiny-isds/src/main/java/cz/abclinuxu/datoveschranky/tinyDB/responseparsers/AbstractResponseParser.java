@@ -1,6 +1,6 @@
 package cz.abclinuxu.datoveschranky.tinyDB.responseparsers;
 
-import cz.abclinuxu.datoveschranky.common.impl.Status;
+import cz.abclinuxu.datoveschranky.common.Status;
 import cz.abclinuxu.datoveschranky.tinyDB.holders.OutputHolder;
 import cz.abclinuxu.datoveschranky.tinyDB.holders.StringHolder;
 import java.util.HashMap;

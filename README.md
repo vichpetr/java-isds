@@ -57,6 +57,38 @@ for (MessageEnvelope env : envelopes) {
 }
 ```
 
+## OSGi ready
+This library is OSGi ready. 
+It provides `features.xml` for easy installation into 
+[Apache Karaf](http://karaf.apache.org/) or [JBoss Fuse](https://developers.redhat.com/products/fuse/overview/).
+
+Installation into JBoss Fuse 6.3 would look like this:  
+```bash
+# download features.xml from maven repo to fuse -- replace snapshot version for appropriate one
+JBossFuse:karaf@root> features:addurl mvn:cz.abclinuxu.datoveschranky/karaf/1.0.0-SNAPSHOT/xml/features
+
+# download jars and install them to fuse
+JBossFuse:karaf@root> features:install isds
+```
+
+**Note** Fuse should check maven central for release artifacts out of the box.
+Snasphot artifacts must be explicitelly enabled in fuse config (config file `$FUSE_HOME/etc/org.ops4j.pax.url.mvn.cfg`).
+
+**Note** Following commands work for JBoss Fuse 6.x and Karaf 2.x. 
+Commands in Karaf 3.x onwards have different names.
+
+
+To verify everything is installed correctly:
+```bash
+JBossFuse:karaf@root> osgi:list
+START LEVEL 100 , List Threshold: 50
+   ID   State         Blueprint      Spring    Level  Name
+# note that bcprov was already present in fuse
+[ 293] [Active     ] [            ] [       ] [   80] JavaISDS :: Common (1.0.0.SNAPSHOT)
+[ 294] [Active     ] [            ] [       ] [   80] JavaISDS :: JavaISDS (1.0.0.SNAPSHOT)
+[ 295] [Active     ] [            ] [       ] [   80] JavaISDS :: Web Services (1.0.0.SNAPSHOT)
+[ 296] [Active     ] [            ] [       ] [   80] bcpkix (1.54)
+```
 
 ## Contributions
 We welcome contributions of all kinds. 

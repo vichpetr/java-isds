@@ -1,7 +1,7 @@
 package cz.abclinuxu.datoveschranky.tinyDB.responseparsers;
 
 import cz.abclinuxu.datoveschranky.common.interfaces.AttachmentStorer;
-import cz.abclinuxu.datoveschranky.common.impl.Utils;
+import cz.abclinuxu.datoveschranky.common.Utils;
 import cz.abclinuxu.datoveschranky.tinyDB.holders.OutputHolder;
 import cz.abclinuxu.datoveschranky.tinyDB.holders.OutputStreamHolder;
 import cz.abclinuxu.datoveschranky.common.entities.Attachment;

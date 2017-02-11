@@ -1,4 +1,4 @@
-package cz.abclinuxu.datoveschranky.common.impl;
+package cz.abclinuxu.datoveschranky.common;
 
 import java.io.Serializable;
 

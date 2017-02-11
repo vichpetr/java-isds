@@ -1,19 +1,19 @@
 package cz.abclinuxu.datoveschranky;
 
-import cz.abclinuxu.datoveschranky.common.entities.Address;
-import cz.abclinuxu.datoveschranky.common.entities.DataBoxType;
-import cz.abclinuxu.datoveschranky.common.entities.DataBoxWithDetails;
-import cz.abclinuxu.datoveschranky.common.entities.SearchResult;
-import cz.abclinuxu.datoveschranky.common.interfaces.DataBoxServices;
-
-import java.util.List;
-
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import java.util.List;
+
+import cz.abclinuxu.datoveschranky.common.entities.Address;
+import cz.abclinuxu.datoveschranky.common.entities.DataBoxType;
+import cz.abclinuxu.datoveschranky.common.entities.DataBoxWithDetails;
+import cz.abclinuxu.datoveschranky.common.entities.SearchResult;
+import cz.abclinuxu.datoveschranky.common.interfaces.DataBoxServices;
 
 /**
  * @author xrosecky
@@ -46,27 +46,13 @@ public class SearchTest {
         List<DataBoxWithDetails> boxes1 = services.getDataBoxSearchService().findOVMsByName("min");
         Assert.assertTrue("Search must return more than 1 entry. Found: " + boxes1.size(), boxes1.size() > 1);
 
-        int entriesWithoutAnyNumber = 0;
-        for (DataBoxWithDetails db : boxes1) {
-            if ("87791935".equals(db.getIC())) {
-                System.out.println("this entry is full of null values, skipping it:");
-                System.out.println(db);
-                continue;
-            }
-            Assert.assertNotNull("City shouldn't be null.", db.getAddressDetails().getCity());
-            // todo verify that certain entries can have null in number in street
-            // avoid test failure because of messy test data
-            boolean hasSomeNumber = (db.getAddressDetails().getNumberInStreet() != null) || (db.getAddressDetails().getNumberInMunicipality() != null);
-            if (!hasSomeNumber) {
-                entriesWithoutAnyNumber++;
-                System.out.println("Entry without any number: " + db);
-            }
-            Assert.assertTrue("Entry Should have street or municipal number", hasSomeNumber);
-            Assert.assertNotNull("Address shouldn't be null", db.getAddressDetails().getStreet());
-            Assert.assertNotNull("Zip Code shouldn't be null", db.getAddressDetails().getZipCode());
-            Assert.assertNotNull("State shouldn't be null", db.getAddressDetails().getState());
+        for (int i = 0; i < Math.min(10, boxes1.size()); i++) {
+            DataBoxWithDetails db = boxes1.get(i);
+            Assert.assertNotNull("City shouldn't be null. " + db, db.getAddressDetails().getCity());
+            Assert.assertNotNull("Address shouldn't be null. " + db, db.getAddressDetails().getStreet());
+            Assert.assertNotNull("Zip Code shouldn't be null. " + db, db.getAddressDetails().getZipCode());
+            Assert.assertNotNull("State shouldn't be null. " + db, db.getAddressDetails().getState());
         }
-        Assert.assertTrue("There must be some entry with street number", entriesWithoutAnyNumber < boxes1.size());
         List<DataBoxWithDetails> boxes2 = services.getDataBoxSearchService().findOVMsByName("Ministerstvo nepravdy a lasky");
         Assert.assertTrue("Search result for non existent entry should be empty", boxes2.isEmpty());
     }

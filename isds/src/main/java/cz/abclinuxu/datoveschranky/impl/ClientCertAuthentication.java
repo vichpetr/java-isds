@@ -4,22 +4,22 @@
  */
 package cz.abclinuxu.datoveschranky.impl;
 
-import com.sun.xml.ws.developer.JAXWSProperties;
-import cz.abclinuxu.datoveschranky.common.impl.Config;
-import cz.abclinuxu.datoveschranky.common.impl.DataBoxException;
+import javax.net.ssl.KeyManagerFactory;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSocketFactory;
+import javax.xml.ws.BindingProvider;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.security.KeyStore;
 import java.security.SecureRandom;
 import java.util.Map;
-import javax.net.ssl.KeyManagerFactory;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSocketFactory;
-import javax.xml.ws.BindingProvider;
+
+import cz.abclinuxu.datoveschranky.common.Config;
+import cz.abclinuxu.datoveschranky.common.DataBoxException;
 
 /**
- *
  * @author xrosecky
  */
 public class ClientCertAuthentication extends Authentication {
@@ -40,7 +40,7 @@ public class ClientCertAuthentication extends Authentication {
 
     @Override
     protected void configureService(Map<String, Object> requestContext, String servicePostfix) {
-        requestContext.put(JAXWSProperties.SSL_SOCKET_FACTORY, this.createSSLSocketFactory());
+        requestContext.put(SSL_SOCKET_FACTORY, this.createSSLSocketFactory());
         requestContext.put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, config.getServiceURLClientCert() + servicePostfix);
         this.configureServiceOverride(requestContext, servicePostfix);
     }

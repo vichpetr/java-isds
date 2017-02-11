@@ -14,9 +14,9 @@ import java.util.Scanner;
 
 import cz.abclinuxu.datoveschranky.common.entities.Message;
 import cz.abclinuxu.datoveschranky.common.entities.content.FileContent;
-import cz.abclinuxu.datoveschranky.common.impl.ByteArrayAttachmentStorer;
-import cz.abclinuxu.datoveschranky.common.impl.Config;
-import cz.abclinuxu.datoveschranky.common.impl.DataBoxEnvironment;
+import cz.abclinuxu.datoveschranky.common.ByteArrayAttachmentStorer;
+import cz.abclinuxu.datoveschranky.common.Config;
+import cz.abclinuxu.datoveschranky.common.DataBoxEnvironment;
 import cz.abclinuxu.datoveschranky.common.interfaces.AttachmentStorer;
 import cz.abclinuxu.datoveschranky.impl.MessageValidator;
 

@@ -84,7 +84,7 @@ public class Validator {
         }
 
         Attachment first = attachments.get(0);
-        if (!first.getMetaType().equals("main")) {
+        if (first.getMetaType() == null || !first.getMetaType().equals("main")) {
             throw new IllegalArgumentException(String.format("Druh (metatype) prvni pisemnosti "
                     +" v prilohach musí být main, tady je %s.", first.getMetaType()));
         }

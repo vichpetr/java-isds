@@ -3,7 +3,7 @@ package cz.abclinuxu.datoveschranky.impl;
 import cz.abclinuxu.datoveschranky.common.entities.Message;
 import cz.abclinuxu.datoveschranky.common.entities.MessageEnvelope;
 import cz.abclinuxu.datoveschranky.common.entities.MessageType;
-import cz.abclinuxu.datoveschranky.common.impl.DataBoxException;
+import cz.abclinuxu.datoveschranky.common.DataBoxException;
 import cz.abclinuxu.datoveschranky.common.interfaces.AttachmentStorer;
 import cz.abclinuxu.datoveschranky.common.interfaces.DataBoxDownloadService;
 import cz.abclinuxu.datoveschranky.ws.dm.DmOperationsPortType;

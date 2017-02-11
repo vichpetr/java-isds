@@ -1,7 +1,7 @@
 package cz.abclinuxu.datoveschranky.impl;
 
-import cz.abclinuxu.datoveschranky.common.impl.DataBoxException;
-import cz.abclinuxu.datoveschranky.common.impl.Status;
+import cz.abclinuxu.datoveschranky.common.DataBoxException;
+import cz.abclinuxu.datoveschranky.common.Status;
 import cz.abclinuxu.datoveschranky.ws.db.TDbReqStatus;
 import cz.abclinuxu.datoveschranky.ws.dm.TStatus;
 import org.apache.log4j.Logger;

@@ -1,4 +1,4 @@
-package cz.abclinuxu.datoveschranky.common.impl;
+package cz.abclinuxu.datoveschranky.common;
 
 import cz.abclinuxu.datoveschranky.common.interfaces.AttachmentStorer;
 import cz.abclinuxu.datoveschranky.common.entities.Attachment;
@@ -42,5 +42,11 @@ public class FileAttachmentStorer implements AttachmentStorer {
         String description = attachment.getDescription();
         return prefix + "_" + description;
     }
-    
+
+    @Override
+    public String toString() {
+        return "FileAttachmentStorer{" +
+                "directory=" + directory +
+                '}';
+    }
 }

@@ -1,7 +1,6 @@
 package cz.abclinuxu.datoveschranky.impl;
 
 import cz.abclinuxu.datoveschranky.common.entities.DataBox;
-import cz.abclinuxu.datoveschranky.common.entities.DeliveryEvent;
 import cz.abclinuxu.datoveschranky.common.entities.Hash;
 import cz.abclinuxu.datoveschranky.common.entities.MessageEnvelope;
 import cz.abclinuxu.datoveschranky.common.entities.MessageType;
@@ -9,12 +8,11 @@ import cz.abclinuxu.datoveschranky.common.entities.DeliveryInfo;
 import cz.abclinuxu.datoveschranky.common.entities.DocumentIdent;
 import cz.abclinuxu.datoveschranky.common.entities.MessageState;
 import cz.abclinuxu.datoveschranky.common.entities.MessageStateChange;
-import cz.abclinuxu.datoveschranky.common.impl.DataBoxException;
+import cz.abclinuxu.datoveschranky.common.DataBoxException;
 import cz.abclinuxu.datoveschranky.common.interfaces.DataBoxMessagesService;
 import cz.abclinuxu.datoveschranky.ws.XMLUtils;
 import cz.abclinuxu.datoveschranky.ws.dm.DmInfoPortType;
 import cz.abclinuxu.datoveschranky.ws.dm.TDelivery;
-import cz.abclinuxu.datoveschranky.ws.dm.TEvent;
 import cz.abclinuxu.datoveschranky.ws.dm.THash;
 import cz.abclinuxu.datoveschranky.ws.dm.TRecord;
 import cz.abclinuxu.datoveschranky.ws.dm.TRecordsArray;
