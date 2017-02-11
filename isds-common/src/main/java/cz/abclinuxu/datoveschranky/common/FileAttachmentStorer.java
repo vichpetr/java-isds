@@ -42,5 +42,11 @@ public class FileAttachmentStorer implements AttachmentStorer {
         String description = attachment.getDescription();
         return prefix + "_" + description;
     }
-    
+
+    @Override
+    public String toString() {
+        return "FileAttachmentStorer{" +
+                "directory=" + directory +
+                '}';
+    }
 }
