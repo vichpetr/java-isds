@@ -26,11 +26,13 @@ public class FileContent implements Content {
         return file.length();
     }
 
-    
-    
+    public File getFile(){
+        return file;
+    }
+
     @Override
     public String toString() {
         return file.getAbsolutePath();
     }
-    
+
 }
