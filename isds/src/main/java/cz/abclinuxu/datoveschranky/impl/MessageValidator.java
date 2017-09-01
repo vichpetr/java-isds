@@ -61,8 +61,8 @@ import org.xml.sax.helpers.XMLFilterImpl;
 /**
  * Třída pro práci s podepsanými zprávami, umožňuje ověření podpisu a časového
  * razítka, extrakci příloh z podepsané zprávy a výpočet haše zprávy.
- *
- *
+ * <p>
+ * <p>
  * TODO: Rozhrání a implementace této třídy přejde předělat, nyní slouží pouze za
  * účelem testování. Implementace je neefektivní.
  *
@@ -86,6 +86,7 @@ public class MessageValidator {
 
     /**
      * Wrapper nad metodou {@link MessageValidator#validateAndCreateMessage(byte[], AttachmentStorer, boolean)}.
+     *
      * @param content PKCS podepsany obsah
      * @param storer uloziste pro prilohy
      * @return instance zpravy ze zfo souboru
@@ -110,24 +111,23 @@ public class MessageValidator {
     /**
      * Na vstup dostane podepsanou zprávu v binárním formátu PKCS#7 (žádné XML),
      * a vrátí zprávu včetně příloh při splnění následujících podmínek:
-     *
+     * <p>
      * - zpráva je podepsaná platným certifikátem
      * - časové razítko je podepsané platným certifikátem
      * - haš časového razítka a haš zprávy (element dmHash) jsou totožné a
      *   souhlasí se spočítaným hašem ze zprávy způsobem definovaným
      *   v dokumentaci k ISDS.
-     *
+     * <p>
      * Validace zpráv probíha proti certifikátům, které jsou předány při
      * volání konstruktoru této třídy, ne proti přiloženým certifikátům k
      * časovému razítku či podpisu zprávy.
-     *
+     * <p>
      * Pokud zpráva nesplnuje výše uvedené podmínky, je vyhozena vyjímka
      * DataBoxException s detailním popisem chyby.
      *
-     * @param  asPKCS7  zpráva v obalu PKCS#7
-     * @return  zpráva včetně příloh
+     * @param asPKCS7 zpráva v obalu PKCS#7
+     * @return zpráva včetně příloh
      * @throws DataBoxException při neúspěšné validaci
-     *
      */
     public Message validateAndCreateMessage(byte[] asPKCS7, AttachmentStorer storer, boolean checkHash) throws DataBoxException {
         byte[] asXML = validator.readPKCS7(asPKCS7);
@@ -169,7 +169,7 @@ public class MessageValidator {
         byte[] asXML = validator.readPKCS7(asPCKS7);
         MarshallerResult result = null;
         try {
-            result = load(TDeliveryMessageOutput .class, asXML);
+            result = load(TDeliveryMessageOutput.class, asXML);
         } catch (Exception ex) {
             throw new DataBoxException("Nemohu demarsalovat zpravu", ex);
         }
@@ -179,19 +179,18 @@ public class MessageValidator {
 
     /**
      * Spočítá haš zprávy jak je definován v ISDS u zprávy v XMLku, tzn.
-     * od elementu <p:dmDm> až po </p:dmDm> včetně (od zobáčku po zobáček).
-     *
+     * od elementu &lt;p:dmDm> až po &lt;/p:dmDm> včetně (od zobáčku po zobáček).
+     * <p>
      * DOM ani SAX nezachovává fyzickou strukturu, např. mezery oddělujíci
-     * atributy (třeba "<a href='bla bla'/>" vs "<a    href='bla bla'/>" ) a haš v
+     * atributy (třeba "&lt;a href='bla bla'/>" vs "&lt;a    href='bla bla'/>" ) a haš v
      * takovém případě by nevyšel, takže se na to musí jít takhle přímo, tzn. najít
-     * v posloupnosti bytů počátek elementu <p:dmDm> a konec elementu </p:dmDm> a
+     * v posloupnosti bytů počátek elementu &lt;p:dmDm> a konec elementu &lt;/p:dmDm> a
      * z této posloupnosti vypočítat haš zprávy.
-     *
+     * <p>
      * TODO: místo pole bajtů to bude akceptovat InputStream a hledat začátek
      * a konec pomocí stavového automatu a obsah mezi nimi po částech pumpovat
      * do hašovací funkce, takže spočítání haše bude efektivní z hlediska času
      * a paměti, ne jako tohle, kde alokuji velký String v paměti...
-     *
      */
     static Hash computeMessageHash(byte[] messageInXML, String algorithm) throws DataBoxException {
         try {
@@ -285,6 +284,9 @@ public class MessageValidator {
     }
 
     protected Message buildMessage(MessageEnvelope envelope, TReturnedMessage message, AttachmentStorer storer) {
+        // doplnit obalku daty z prijate zpravy
+        buildMessage(message.getDmDm(), envelope);
+
         List<Attachment> attachments = new ArrayList<Attachment>();
         for (DmFile file : message.getDmDm().getDmFiles().getDmFile()) {
             Attachment attachment = new Attachment();
@@ -296,14 +298,14 @@ public class MessageValidator {
                 try {
                     os = storer.store(envelope, attachment);
                     if (file.getDmEncodedContent() != null) {
-                    	os.write(file.getDmEncodedContent());
+                        os.write(file.getDmEncodedContent());
                     } else if (file.getDmXMLContent() != null) {
-                    	os.write(toByteArray(file.getDmXMLContent().getAny()));
-					} else {
-						throw new IllegalArgumentException(
-								"both file.getDmEncodedContent() "
-										+ "and file.getDmXMLContent() are null, messageId is "
-										+ envelope.getMessageID());
+                        os.write(toByteArray(file.getDmXMLContent().getAny()));
+                    } else {
+                        throw new IllegalArgumentException(
+                                "both file.getDmEncodedContent() "
+                                        + "and file.getDmXMLContent() are null, messageId is "
+                                        + envelope.getMessageID());
                     }
                 } finally {
                     if (os != null) {
@@ -385,19 +387,19 @@ public class MessageValidator {
     }
 
     protected static byte[] toByteArray(Element element) {
-		try {
-    	  Source source = new DOMSource(element);
-          ByteArrayOutputStream out = new ByteArrayOutputStream();
-          Result result = new StreamResult(out);
-          TransformerFactory factory = TransformerFactory.newInstance();
-          Transformer transformer;
-          transformer = factory.newTransformer();
-          transformer.transform(source, result);
-          return out.toByteArray();
-		} catch (TransformerConfigurationException tce) {
-			throw new RuntimeException(tce);
-		} catch (TransformerException te) {
-			throw new RuntimeException(te);
-		}
+        try {
+            Source source = new DOMSource(element);
+            ByteArrayOutputStream out = new ByteArrayOutputStream();
+            Result result = new StreamResult(out);
+            TransformerFactory factory = TransformerFactory.newInstance();
+            Transformer transformer;
+            transformer = factory.newTransformer();
+            transformer.transform(source, result);
+            return out.toByteArray();
+        } catch (TransformerConfigurationException tce) {
+            throw new RuntimeException(tce);
+        } catch (TransformerException te) {
+            throw new RuntimeException(te);
+        }
     }
 }
