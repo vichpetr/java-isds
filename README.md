@@ -1,5 +1,7 @@
 # Java ISDS
 
+**Project is no longer being actively maintained.**
+
 [![Build Status](https://travis-ci.org/czgov/java-isds.svg?branch=master)](https://travis-ci.org/czgov/java-isds)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/cz.abclinuxu.datoveschranky/isds/badge.svg)](https://maven-badges.herokuapp.com/maven-central/cz.abclinuxu.datoveschranky/isds)
 [![Javadocs](http://javadoc.io/badge/cz.abclinuxu.datoveschranky/isds.svg)](http://javadoc.io/doc/cz.abclinuxu.datoveschranky/isds)
