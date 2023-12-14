@@ -1,7 +1,5 @@
 package cz.abclinuxu.datoveschranky;
 
-import org.junit.Test;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -15,6 +13,7 @@ import cz.abclinuxu.datoveschranky.impl.Authentication;
 import cz.abclinuxu.datoveschranky.impl.BasicAuthentication;
 import cz.abclinuxu.datoveschranky.impl.ClientCertAuthentication;
 import cz.abclinuxu.datoveschranky.impl.DataBoxManager;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author xrosecky

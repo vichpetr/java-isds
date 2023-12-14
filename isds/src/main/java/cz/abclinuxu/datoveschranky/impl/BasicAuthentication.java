@@ -4,7 +4,7 @@ import cz.abclinuxu.datoveschranky.common.Config;
 import cz.abclinuxu.datoveschranky.common.DataBoxException;
 import java.security.KeyStore;
 import java.util.Map;
-import javax.xml.ws.BindingProvider;
+import jakarta.xml.ws.BindingProvider;
 
 /**
  *

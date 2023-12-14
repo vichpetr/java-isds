@@ -7,7 +7,7 @@ package cz.abclinuxu.datoveschranky.impl;
 import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
-import javax.xml.ws.BindingProvider;
+import jakarta.xml.ws.BindingProvider;
 
 import java.io.File;
 import java.io.FileInputStream;

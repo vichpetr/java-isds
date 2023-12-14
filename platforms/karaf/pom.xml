@@ -42,6 +42,7 @@
         <!-- tell maven to deploy also features.xml -->
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>build-helper-maven-plugin</artifactId>
+        <version>3.5.0</version>
         <executions>
           <execution>
             <id>attach-artifacts</id>

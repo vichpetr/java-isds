@@ -9,28 +9,38 @@
   </parent>
 
   <properties>
-      <osgi.import>
-        javax.xml.ws;version="[1.1,3)",
-        ${osgi.import.default}
-      </osgi.import>
+<!--      <osgi.import>-->
+<!--        javax.xml.ws;version="[1.1,3)",-->
+<!--        ${osgi.import.default}-->
+<!--      </osgi.import>-->
+    <jakarta.xml.ws-api.version>4.0.1</jakarta.xml.ws-api.version>
+    <jaxws-rt.version>4.0.2</jaxws-rt.version>
+    <jaxws-ri.version>4.0.2</jaxws-ri.version>
+    <jaxws-maven-plugin.version>3.0.0</jaxws-maven-plugin.version>
   </properties>
 
   <artifactId>isds-web-services</artifactId>
   <name>JavaISDS :: Web Services</name>
   <description>Entity classes generated from WSDL.</description>
-  <packaging>bundle</packaging>
+  <packaging>jar</packaging>
 
   <dependencies>
     <dependency>
+      <groupId>jakarta.xml.ws</groupId>
+      <artifactId>jakarta.xml.ws-api</artifactId>
+      <version>${jakarta.xml.ws-api.version}</version>
+    </dependency>
+    <dependency>
       <groupId>com.sun.xml.ws</groupId>
       <artifactId>jaxws-rt</artifactId>
-      <version>2.2.10</version>
-        <exclusions>
-          <exclusion>
-            <artifactId>mimepull</artifactId>
-            <groupId>org.jvnet</groupId>
-          </exclusion>
-        </exclusions>
+      <version>${jaxws-rt.version}</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.sun.xml.ws</groupId>
+      <artifactId>jaxws-ri</artifactId>
+      <version>${jaxws-ri.version}</version>
+      <type>pom</type>
     </dependency>
   </dependencies>
   
@@ -46,14 +56,13 @@
 
     <plugins>     
       <plugin>
-        <groupId>org.codehaus.mojo</groupId>
+        <groupId>com.sun.xml.ws</groupId>
         <artifactId>jaxws-maven-plugin</artifactId>
-        <version>2.4.1</version>
+        <version>${jaxws-maven-plugin.version}</version>
         <configuration>
-          <!-- Needed with JAXP 1.5 -->
-          <vmArgs>
-            <vmArg>-Djavax.xml.accessExternalSchema=all</vmArg>
-          </vmArgs>
+          <wsdlDirectory>${basedir}/src/main/resources</wsdlDirectory>
+          <sourceDestDir>${basedir}/src/main/java</sourceDestDir>
+          <extension>true</extension>
         </configuration>
         <executions>
           <execution>
@@ -69,13 +78,6 @@
                 <wsdlFile>db_search.wsdl</wsdlFile>
                 <wsdlFile>db_supplementary.wsdl</wsdlFile>
               </wsdlFiles>
-              <!--
-              <wsdlUrls>
-                 <wsdlUrl>http://anna.fi.muni.cz/~xrosecky/DS/db_manipulations.wsdl</wsdlUrl>
-                 <wsdlUrl>http://anna.fi.muni.cz/~xrosecky/DS/db_search.wsdl</wsdlUrl>
-                 <wsdlUrl>http://anna.fi.muni.cz/~xrosecky/DS/db_supplementary.wsdl</wsdlUrl>
-              </wsdlUrls>
-              -->
             </configuration>
             <goals>
               <goal>wsimport</goal>
@@ -93,13 +95,7 @@
               <wsdlFiles> 
                 <wsdlFile>dm_info.wsdl</wsdlFile>
                 <wsdlFile>dm_operations.wsdl</wsdlFile>
-              </wsdlFiles> 
-              <!--
-              <wsdlUrls> 
-                 <wsdlUrl>http://anna.fi.muni.cz/~xrosecky/DS/dm_info.wsdl</wsdlUrl>
-                 <wsdlUrl>http://anna.fi.muni.cz/~xrosecky/DS/dm_operations.wsdl</wsdlUrl>
-              </wsdlUrls>
-              -->
+              </wsdlFiles>
             </configuration>
             <goals>
               <goal>wsimport</goal>

@@ -5,13 +5,15 @@ import cz.abclinuxu.datoveschranky.common.entities.MessageEnvelope;
 import cz.abclinuxu.datoveschranky.common.ByteArrayAttachmentStorer;
 import cz.abclinuxu.datoveschranky.common.interfaces.DataBoxDownloadService;
 import cz.abclinuxu.datoveschranky.common.interfaces.DataBoxMessagesService;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import junit.framework.Assert;
-import org.junit.Test;
+
 
 /**
  *
@@ -20,13 +22,13 @@ import org.junit.Test;
 public class DownloadAllMessagesTest {
 
     private static TestHelper helper = new TestHelper();
-    private static int MAX = 10000;
+    private static final int MAX = 10000;
     private static int BELOW_LIMIT = 2;
     private static int BELOW_LIMIT_COUNT = 3;
 
     @Test
     public void downloadAllMessages() throws Exception {
-	int limits[] = new int[]{ 3, 4, 5, MAX};
+	int[] limits = new int[]{ 3, 4, 5, MAX};
 	for (int limit : limits) {
 	    downloadAllMessages(limit);
 	}
@@ -53,7 +55,7 @@ public class DownloadAllMessagesTest {
 	    offset += messages.size();
 	    for (MessageEnvelope envelope : messages) {
 		String id = envelope.getMessageID();
-		Assert.assertFalse(seen.contains(id));
+		Assertions.assertFalse(seen.contains(id));
 		seen.add(id);
 		if (envelope.getState().canBeDownloaded()) {
 		    Message mess = downloadService.downloadMessage(envelope, new ByteArrayAttachmentStorer());
@@ -63,7 +65,7 @@ public class DownloadAllMessagesTest {
 	    }
 	}
 	List<MessageEnvelope> messages = messageService.getListOfReceivedMessages(begin.getTime(), end.getTime(), null, 0, MAX);
-	Assert.assertEquals(seen.size(), messages.size());
+	Assertions.assertEquals(seen.size(), messages.size());
         System.out.println(seen.size());
     }
 

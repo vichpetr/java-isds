@@ -11,7 +11,7 @@ import cz.abclinuxu.datoveschranky.ws.dm.TReturnedMessage;
 import cz.abclinuxu.datoveschranky.ws.dm.TStatus;
 import java.io.IOException;
 import java.io.OutputStream;
-import javax.xml.ws.Holder;
+import jakarta.xml.ws.Holder;
 import org.apache.log4j.Logger;
 
 /**
@@ -41,7 +41,7 @@ public class DataBoxDownloadServiceImpl implements DataBoxDownloadService {
         Holder<TReturnedMessage> hMessage = new Holder<TReturnedMessage>();
         dmOp.messageDownload(envelope.getMessageID(), hMessage, status);
         ErrorHandling.throwIfError("Nemohu stahnout prijatou zpravu.", status.value);
-	logger.info(String.format("downloadMessage successfull"));
+	logger.info("downloadMessage successfull");
         TReturnedMessage message = hMessage.value;
         return validator.buildMessage(envelope, message, storer);
     }
@@ -65,7 +65,7 @@ public class DataBoxDownloadServiceImpl implements DataBoxDownloadService {
         try {
             os.write(messageAsPKCS7.value);
             os.flush();
-	    logger.info(String.format("downloadSignedMessage successfull"));
+	    logger.info("downloadSignedMessage successfull");
         } catch (IOException ioe) {
             throw new DataBoxException("Chyba pri zapisu do vystupniho proudu.", ioe);
         }

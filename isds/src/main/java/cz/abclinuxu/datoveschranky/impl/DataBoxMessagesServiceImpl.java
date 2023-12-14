@@ -27,7 +27,7 @@ import java.util.Date;
 import java.util.EnumSet;
 import java.util.List;
 import javax.xml.datatype.XMLGregorianCalendar;
-import javax.xml.ws.Holder;
+import jakarta.xml.ws.Holder;
 import org.apache.log4j.Logger;
 
 /**
@@ -55,7 +55,7 @@ public class DataBoxMessagesServiceImpl implements DataBoxMessagesService {
         String value = String.valueOf(MessageState.toInt(filter));
         dataMessageInfo.getListOfReceivedMessages(xmlFrom, xmlTo, null, value, bOffset, bLimit, records, status);
         ErrorHandling.throwIfError("Nemohu stahnout seznam prijatych zprav", status.value);
-        logger.info(String.format("getListOfReceivedMessages finished"));
+        logger.info("getListOfReceivedMessages finished");
         return createMessages(records.value, MessageType.RECEIVED);
     }
 
@@ -71,7 +71,7 @@ public class DataBoxMessagesServiceImpl implements DataBoxMessagesService {
         String value = String.valueOf(MessageState.toInt(filter));
         dataMessageInfo.getListOfSentMessages(xmlSince, xmlTo, null, value, bOffset, bLimit, records, status);
         ErrorHandling.throwIfError("Nemohu stahnout seznam odeslanych zprav", status.value);
-        logger.info(String.format("getListOfSentMessages finished"));
+        logger.info("getListOfSentMessages finished");
         return createMessages(records.value, MessageType.SENT);
     }
 
@@ -131,7 +131,7 @@ public class DataBoxMessagesServiceImpl implements DataBoxMessagesService {
         try {
             os.write(signedDeliveryInfo.value);
             os.flush();
-            logger.info(String.format("getSignedDeliveryInfo successfull"));
+            logger.info("getSignedDeliveryInfo successfull");
         } catch (IOException ioe) {
             throw new DataBoxException("Chyba pri zapisu do vystupniho proudu.", ioe);
         }

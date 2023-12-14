@@ -16,7 +16,7 @@ import cz.abclinuxu.datoveschranky.ws.dm.TMessageCreateInput.DmEnvelope;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.math.BigInteger;
-import javax.xml.ws.Holder;
+import jakarta.xml.ws.Holder;
 
 /**
  *

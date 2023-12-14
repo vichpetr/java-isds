@@ -15,6 +15,7 @@ import cz.abclinuxu.datoveschranky.common.interfaces.DataBoxUploadService;
 import cz.abclinuxu.datoveschranky.impl.MessageValidator;
 
 import java.io.ByteArrayOutputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -22,12 +23,7 @@ import java.util.EnumSet;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.*;
 
 /**
  * @author xrosecky
@@ -35,11 +31,11 @@ import org.junit.Test;
 public class MessageUploadAndDownloadTest {
 
     // private static DataBoxServices services = null;
-    private static TestHelper helper = new TestHelper();
+    private static final TestHelper helper = new TestHelper();
     private static GregorianCalendar begin = null;
     private static GregorianCalendar end = null;
 
-    @BeforeClass
+    @BeforeAll
     public static void setUpClass() throws Exception {
         begin = new GregorianCalendar();
         begin.roll(Calendar.DAY_OF_YEAR, -10);
@@ -47,15 +43,15 @@ public class MessageUploadAndDownloadTest {
         end.roll(Calendar.DAY_OF_YEAR, 1);
     }
 
-    @AfterClass
+    @AfterAll
     public static void tearDownClass() throws Exception {
     }
 
-    @Before
+    @BeforeEach
     public void setUp() {
     }
 
-    @After
+    @AfterEach
     public void tearDown() {
     }
 
@@ -122,14 +118,14 @@ public class MessageUploadAndDownloadTest {
         attach1.setDescription("ahoj.xml");
         attach1.setMetaType("main");
         // attach1.setMimeType("text/xml");
-        attach1.setContents(new ByteContent((prolog + "<text>Vanoce jsou svatky klidu</text>").getBytes("UTF-8")));
+        attach1.setContents(new ByteContent((prolog + "<text>Vanoce jsou svatky klidu</text>").getBytes(StandardCharsets.UTF_8)));
         attachments.add(attach1);
         // druha priloha
         Attachment attach2 = new Attachment();
         attach2.setDescription("Óda_na_příliš_žluťoučkého_koně.xml");
         attach2.setMetaType("enclosure");
         // attach2.setMimeType("text/xml");
-        attach2.setContents(new ByteContent((prolog + "<text>Příliš žluťoučký kůň úpěl ďábelské ódy.</text>").getBytes("UTF-8")));
+        attach2.setContents(new ByteContent((prolog + "<text>Příliš žluťoučký kůň úpěl ďábelské ódy.</text>").getBytes(StandardCharsets.UTF_8)));
         attachments.add(attach2);
         // a ted ji poslem
         Message message = new Message(env, null, null, attachments);
@@ -144,32 +140,32 @@ public class MessageUploadAndDownloadTest {
         }
         List<MessageStateChange> changes = services.getDataBoxMessagesService().GetMessageStateChanges(null, null);
         for (MessageStateChange change : changes) {
-            Assert.assertNotNull(change.getEventTime());
-            Assert.assertNotNull(change.getMessageId());
-            Assert.assertNotNull(change.getState());
+            Assertions.assertNotNull(change.getEventTime());
+            Assertions.assertNotNull(change.getMessageId());
+            Assertions.assertNotNull(change.getState());
         }
     }
 
     private void testGetListOfSentMessages(DataBoxServices services) throws Exception {
         List<MessageEnvelope> messages = services.getDataBoxMessagesService().getListOfSentMessages(begin.getTime(), end.getTime(), null, 0, 0);
-        Assert.assertTrue(messages.isEmpty());
+        Assertions.assertTrue(messages.isEmpty());
         messages = services.getDataBoxMessagesService().getListOfSentMessages(begin.getTime(), end.getTime(), null, 0, 5);
-        Assert.assertTrue(messages.size() > 0);
+        Assertions.assertFalse(messages.isEmpty());
         for (MessageEnvelope mess : messages) {
-            Assert.assertTrue(mess.getType().equals(MessageType.SENT));
+            Assertions.assertEquals(mess.getType(), MessageType.SENT);
         }
         messages = services.getDataBoxMessagesService().getListOfSentMessages(begin.getTime(), end.getTime(),
                 EnumSet.of(MessageState.VIRUS_FOUND), 0, 5);
-        Assert.assertEquals(0, messages.size());
+        Assertions.assertEquals(0, messages.size());
     }
 
     private void testGetListOfReceivedMessages(DataBoxServices services) throws Exception {
         List<MessageEnvelope> messages = services.getDataBoxMessagesService().getListOfReceivedMessages(begin.getTime(), end.getTime(), null, 0, 0);
-        Assert.assertEquals("Precondition: there should be no messages", 0, messages.size());
+        Assertions.assertEquals(Float.parseFloat("Precondition: there should be no messages"), 0, messages.size());
         messages = services.getDataBoxMessagesService().getListOfReceivedMessages(begin.getTime(), end.getTime(), null, 0, 5);
-        Assert.assertTrue("There should be at leas one message, found: " + messages.size(), messages.size() > 0);
+        Assertions.assertFalse(messages.isEmpty(), "There should be at leas one message, found: " + messages.size());
         for (MessageEnvelope mess : messages) {
-            Assert.assertTrue(mess.getType().equals(MessageType.RECEIVED));
+            Assertions.assertEquals(mess.getType(), MessageType.RECEIVED);
         }
     }
 
@@ -187,25 +183,22 @@ public class MessageUploadAndDownloadTest {
             Message mess2 = services.getDataBoxDownloadService().downloadMessage(env, new ByteArrayAttachmentStorer());
             List<Attachment> list1 = mess1.getAttachments();
             List<Attachment> list2 = mess2.getAttachments();
-            Assert.assertEquals(list1.size(), list2.size());
+            Assertions.assertEquals(list1.size(), list2.size());
             for (int i = 0; i != list1.size(); i++) {
                 byte[] bytes1 = ((ByteContent) list1.get(i).getContent()).getBytes();
                 byte[] bytes2 = ((ByteContent) list2.get(i).getContent()).getBytes();
-                Assert.assertTrue(Arrays.equals(bytes1, bytes2));
+                Assertions.assertArrayEquals(bytes1, bytes2);
             }
         }
     }
 
     private Message testIntegrity(DataBoxServices services, MessageEnvelope envelope) throws Exception {
         ByteArrayOutputStream os = new ByteArrayOutputStream();
-        try {
+        try (os) {
             services.getDataBoxDownloadService().downloadSignedMessage(envelope, os);
-        } finally {
-            os.close();
         }
         MessageValidator validator = new MessageValidator(helper.getConfig());
         ByteContent content = new ByteContent(os.toByteArray());
-        Message mess = validator.validateAndCreateMessage(content, new ByteArrayAttachmentStorer());
-        return mess;
+        return validator.validateAndCreateMessage(content, new ByteArrayAttachmentStorer());
     }
 }

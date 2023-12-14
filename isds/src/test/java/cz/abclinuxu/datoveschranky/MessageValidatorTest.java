@@ -4,12 +4,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ByteArrayOutputStream;
 
-import org.junit.Test;
-
 import cz.abclinuxu.datoveschranky.common.entities.Message;
 import cz.abclinuxu.datoveschranky.common.entities.content.ByteContent;
 import cz.abclinuxu.datoveschranky.common.ByteArrayAttachmentStorer;
 import cz.abclinuxu.datoveschranky.impl.MessageValidator;
+import org.junit.jupiter.api.Test;
 
 public class MessageValidatorTest {
 

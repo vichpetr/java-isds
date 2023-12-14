@@ -1,8 +1,8 @@
 package cz.abclinuxu.datoveschranky.impl;
 
 import javax.net.ssl.SSLSocketFactory;
-import javax.xml.ws.BindingProvider;
-import javax.xml.ws.Service;
+import jakarta.xml.ws.BindingProvider;
+import jakarta.xml.ws.Service;
 
 import java.security.KeyStore;
 import java.util.Map;

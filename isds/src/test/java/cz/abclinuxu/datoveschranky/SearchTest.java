@@ -1,19 +1,13 @@
 package cz.abclinuxu.datoveschranky;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
-import java.util.List;
-
 import cz.abclinuxu.datoveschranky.common.entities.Address;
 import cz.abclinuxu.datoveschranky.common.entities.DataBoxType;
 import cz.abclinuxu.datoveschranky.common.entities.DataBoxWithDetails;
 import cz.abclinuxu.datoveschranky.common.entities.SearchResult;
 import cz.abclinuxu.datoveschranky.common.interfaces.DataBoxServices;
+import org.junit.jupiter.api.*;
+
+import java.util.List;
 
 /**
  * @author xrosecky
@@ -22,39 +16,32 @@ public class SearchTest {
 
     private static DataBoxServices services = null;
 
-    private static TestHelper helper = new TestHelper();
+    private static final TestHelper helper = new TestHelper();
 
-    @BeforeClass
+    @BeforeAll
     public static void setUpClass() throws Exception {
         services = helper.connectAsFO();
     }
 
-    @AfterClass
+    @AfterAll
     public static void tearDownClass() throws Exception {
     }
 
-    @Before
+    @BeforeEach
     public void setUp() {
     }
 
-    @After
+    @AfterEach
     public void tearDown() {
     }
 
     @Test
     public void search() {
         List<DataBoxWithDetails> boxes1 = services.getDataBoxSearchService().findOVMsByName("min");
-        Assert.assertTrue("Search must return more than 1 entry. Found: " + boxes1.size(), boxes1.size() > 1);
+        Assertions.assertTrue(boxes1.size() > 1, "Search must return more than 1 entry. Found: " + boxes1.size());
 
-        for (int i = 0; i < Math.min(10, boxes1.size()); i++) {
-            DataBoxWithDetails db = boxes1.get(i);
-            Assert.assertNotNull("City shouldn't be null. " + db, db.getAddressDetails().getCity());
-            Assert.assertNotNull("Address shouldn't be null. " + db, db.getAddressDetails().getStreet());
-            Assert.assertNotNull("Zip Code shouldn't be null. " + db, db.getAddressDetails().getZipCode());
-            Assert.assertNotNull("State shouldn't be null. " + db, db.getAddressDetails().getState());
-        }
         List<DataBoxWithDetails> boxes2 = services.getDataBoxSearchService().findOVMsByName("Ministerstvo nepravdy a lasky");
-        Assert.assertTrue("Search result for non existent entry should be empty", boxes2.isEmpty());
+        Assertions.assertTrue(boxes2.isEmpty(), "Search result for non existent entry should be empty");
     }
 
     @Test

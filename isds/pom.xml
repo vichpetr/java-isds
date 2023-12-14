@@ -7,7 +7,7 @@
     <version>1.1.2</version>
   </parent>
 
-  <packaging>bundle</packaging>
+  <packaging>jar</packaging>
   <artifactId>isds</artifactId>
   <name>JavaISDS :: JavaISDS</name>
   <description>Library for accessing ISDS system. Supports sending, downloading, searching and verification.</description>
@@ -33,15 +33,15 @@
       <version>1.1.2</version>
     </dependency>
     <dependency>
-	  <!-- bcpkix transitively depends on bcprov-jdk15on -->
       <groupId>org.bouncycastle</groupId>
-      <artifactId>bcpkix-jdk15on</artifactId>
+      <artifactId>bcpkix-jdk18on</artifactId>
       <version>${bouncycastle-version}</version>
     </dependency>
+
     <dependency>
       <groupId>org.apache.httpcomponents</groupId>
       <artifactId>httpclient</artifactId>
-      <version>4.0</version>
+      <version>4.5.13</version>
     </dependency>
     <dependency>
       <groupId>log4j</groupId>
