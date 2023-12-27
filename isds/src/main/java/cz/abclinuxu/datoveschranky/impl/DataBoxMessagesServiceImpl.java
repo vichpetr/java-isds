@@ -46,8 +46,8 @@ public class DataBoxMessagesServiceImpl implements DataBoxMessagesService {
     public List<MessageEnvelope> getListOfReceivedMessages(Date from,
             Date to, EnumSet<MessageState> filter, int offset, int limit) {
         logger.info(String.format("getListOfReceivedMessages: offset:%s limit:%s", offset, limit));
-        Holder<TRecordsArray> records = new Holder<TRecordsArray>();
-        Holder<TStatus> status = new Holder<TStatus>();
+        Holder<TRecordsArray> records = new Holder<>();
+        Holder<TStatus> status = new Holder<>();
         XMLGregorianCalendar xmlFrom = XMLUtils.toXmlDate(from);
         XMLGregorianCalendar xmlTo = XMLUtils.toXmlDate(to);
         BigInteger bOffset = BigInteger.valueOf(offset);

@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Properties;
 
 import cz.abclinuxu.datoveschranky.common.Config;
@@ -30,7 +33,7 @@ public class TestHelper {
     private Properties properties = null;
     private final Config config = new Config(DataBoxEnvironment.TEST);
     // defined in pom.xml
-    private static final String CONFIG_PATH = System.getProperty("isds.config.path");
+    private static final String CONFIG_PATH = "src/test/resources/configuration.properties";
 
     public TestHelper() {
     }
@@ -43,22 +46,14 @@ public class TestHelper {
             // load only once
             return;
         }
-        InputStream is = null;
+
         properties = new Properties();
-        try {
+        File file = Paths.get(CONFIG_PATH).toFile();
+        try (InputStream is = new FileInputStream(file)) {
             System.out.println("loading config from " + CONFIG_PATH);
-            is = new FileInputStream(CONFIG_PATH);
             properties.load(is);
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to load isds config from " + CONFIG_PATH, e);
-        } finally {
-            if (is != null) {
-                try {
-                    is.close();
-                } catch (IOException e) {
-                    System.err.println("failed to close config input stream" + e);
-                }
-            }
+        } catch (IOException e) {
+            throw new RuntimeException(CONFIG_PATH, e);
         }
     }
 
