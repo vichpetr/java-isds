@@ -1,0 +1,21 @@
+trigger:
+  - main
+
+pool:
+  vmImage: ubuntu-latest
+
+resources:
+  repositories:
+    - repository: iac
+      type: git
+      name: iac
+
+variables:
+  - group: sync-mpsvcrtest
+
+jobs:
+  - template: /pipeline-templates/sync-repos.yaml@iac
+    parameters:
+      remoteRepo: 'dev.azure.com/mpsvcrtest/B2B%20Br%C3%A1na%20MPSV/_git/java-isds'
+      pat: $(pat)
+      branchName: $(Build.SourceBranch)
